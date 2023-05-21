@@ -4,5 +4,14 @@
 <Node>project</Node>
 </PkgNodes>
 </ExpandNodes>
-<FileNodes/>
+<FileNodes>
+<fnode>
+<fileName>src\project\CardService.java</fileName>
+<line>47</line>
+</fnode>
+<ActiveFile>
+<fileName>src\project\Constant.java</fileName>
+<line>19</line>
+</ActiveFile>
+</FileNodes>
 </StateInfo>
