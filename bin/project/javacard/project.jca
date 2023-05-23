@@ -1,0 +1,353 @@
+// converted by version 1.3
+// on Tue May 23 10:58:22 ICT 2023
+
+.package project {
+	.aid 0x11:0x22:0x33:0x44:0x55;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.2;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+	}
+
+	.applet {
+		0x11:0x22:0x33:0x44:0x55:0x0 CardService;
+	}
+
+	.constantPool {
+		// 0
+		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 1
+		classRef CardService;
+		// 2
+		staticMethodRef CardService/<init>()V;
+		// 3
+		virtualMethodRef 0.3.2([BSB)V;		// javacard/framework/Applet.register([BSB)V
+		// 4
+		staticMethodRef CardService/init()V;
+		// 5
+		staticFieldRef byte[] CardService/pin;
+		// 6
+		staticFieldRef short CardService/pinCounter;
+		// 7
+		virtualMethodRef 0.3.3()Z;		// javacard/framework/Applet.selectingApplet()Z
+		// 8
+		virtualMethodRef 0.10.1()[B;		// javacard/framework/APDU.getBuffer()[B
+		// 9
+		virtualMethodRef 0.10.6()S;		// javacard/framework/APDU.setIncomingAndReceive()S
+		// 10
+		staticMethodRef 0.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 11
+		staticFieldRef boolean CardService/pinCreated;
+		// 12
+		staticMethodRef 0.8.1()V;		// javacard/framework/JCSystem.beginTransaction()V
+		// 13
+		staticMethodRef 0.8.2()V;		// javacard/framework/JCSystem.commitTransaction()V
+		// 14
+		virtualMethodRef 0.10.7()S;		// javacard/framework/APDU.setOutgoing()S
+		// 15
+		virtualMethodRef 0.10.9(S)V;		// javacard/framework/APDU.setOutgoingLength(S)V
+		// 16
+		staticFieldRef byte[] Constant/RESPONSE_PIN_CREATE_SUCCESS;
+		// 17
+		virtualMethodRef 0.10.5([BSS)V;		// javacard/framework/APDU.sendBytesLong([BSS)V
+		// 18
+		staticFieldRef byte[] Constant/RESPONSE_PIN_ALREADY_CREATED;
+		// 19
+		staticFieldRef byte[] Constant/RESPONSE_PIN_CHECK_TRUE;
+		// 20
+		staticFieldRef byte[] Constant/RESPONSE_PIN_CHECK_FALSE;
+		// 21
+		staticFieldRef byte[] Constant/RESPONSE_PIN_CHECK_REACH_LIMIT;
+		// 22
+		staticMethodRef 1.0.0()V;		// java/lang/Object.<init>()V
+	}
+
+	.class public CardService 0 extends 0.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			private static boolean pinCreated;		// Z
+			private static byte[] pin;		// [B
+			private static short pinCounter;		// S
+		}
+
+		.publicMethodTable 7 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>()V 0 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 0;		// javacard/framework/Applet.<init>()V
+					return;
+		}
+
+		.method public static install([BSB)V 1 {
+			.stack 5;
+			.locals 0;
+
+				L0:	new 1;		// project/CardService
+					dup;
+					invokespecial 2;		// project/CardService.<init>()V
+					aload_0;
+					sload_1;
+					sconst_1;
+					sadd;
+					aload_0;
+					sload_1;
+					baload;
+					invokevirtual 3;		// javacard/framework/Applet.register([BSB)V
+					invokestatic 4;		// project/CardService.init()V
+					return;
+		}
+
+		.method private static init()V {
+			.stack 3;
+			.locals 1;
+
+				L0:	sconst_4;
+					newarray 11;
+					putstatic_a 5;		// reference project/CardService.pin
+					sconst_0;
+					putstatic_s 6;		// short project/CardService.pinCounter
+					sconst_0;
+					sstore_0;
+				L1:	sload_0;
+					getstatic_a 5;		// reference project/CardService.pin
+					arraylength;
+					if_scmpge L3;
+				L2:	getstatic_a 5;		// reference project/CardService.pin
+					sload_0;
+					bspush 46;
+					bastore;
+					sinc 0 1;
+					goto L1;
+				L3:	return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 5;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	0.10;
+
+				L0:	aload_0;
+					invokevirtual 7;		// javacard/framework/Applet.selectingApplet()Z
+					ifeq L2;
+				L1:	return;
+				L2:	aload_1;
+					invokevirtual 8;		// javacard/framework/APDU.getBuffer()[B
+					astore_2;
+				L3:	aload_1;
+					invokevirtual 9;		// javacard/framework/APDU.setIncomingAndReceive()S
+					sstore_3;
+				L4:	aload_2;
+					sconst_0;
+					baload;
+					ifeq L6;
+				L5:	sspush 28160;
+					invokestatic 10;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	aload_2;
+					sconst_1;
+					baload;
+					stableswitch L31 0 2 L7 L27 L15;
+				L7:	getstatic_b 11;		// boolean project/CardService.pinCreated
+					ifne L14;
+				L8:	invokestatic 12;		// javacard/framework/JCSystem.beginTransaction()V
+					sconst_0;
+					sstore 4;
+				L9:	sload 4;
+					sconst_4;
+					if_scmpge L13;
+				L10:	sconst_5;
+					sload 4;
+					sadd;
+					sstore 5;
+				L11:	getstatic_a 5;		// reference project/CardService.pin
+					sload 4;
+					aload_2;
+					sload 5;
+					baload;
+					bastore;
+				L12:	sinc 4 1;
+					goto L9;
+				L13:	invokestatic 13;		// javacard/framework/JCSystem.commitTransaction()V
+					aload_1;
+					invokevirtual 14;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 15;		// javacard/framework/APDU.setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 16;		// reference project/Constant.RESPONSE_PIN_CREATE_SUCCESS
+					sconst_0;
+					sconst_1;
+					invokevirtual 17;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					sconst_1;
+					putstatic_b 11;		// boolean project/CardService.pinCreated
+					goto_w L32;
+				L14:	aload_1;
+					invokevirtual 14;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 15;		// javacard/framework/APDU.setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 18;		// reference project/Constant.RESPONSE_PIN_ALREADY_CREATED
+					sconst_0;
+					sconst_1;
+					invokevirtual 17;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					goto_w L32;
+				L15:	getstatic_s 6;		// short project/CardService.pinCounter
+					sconst_3;
+					if_scmpgt L26;
+				L16:	sconst_1;
+					sstore 4;
+				L17:	sconst_0;
+					sstore 5;
+				L18:	sload 5;
+					sconst_4;
+					if_scmpge L22;
+				L19:	getstatic_a 5;		// reference project/CardService.pin
+					sload 5;
+					baload;
+					aload_2;
+					sconst_5;
+					sload 5;
+					sadd;
+					baload;
+					if_scmpeq L21;
+				L20:	sconst_0;
+					sstore 4;
+					goto L22;
+				L21:	sinc 5 1;
+					goto L18;
+				L22:	aload_1;
+					invokevirtual 14;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 15;		// javacard/framework/APDU.setOutgoingLength(S)V
+					sload 4;
+					ifeq L24;
+				L23:	aload_1;
+					getstatic_a 19;		// reference project/Constant.RESPONSE_PIN_CHECK_TRUE
+					sconst_0;
+					sconst_1;
+					invokevirtual 17;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					goto L25;
+				L24:	aload_1;
+					getstatic_a 20;		// reference project/Constant.RESPONSE_PIN_CHECK_FALSE
+					sconst_0;
+					sconst_1;
+					invokevirtual 17;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					getstatic_s 6;		// short project/CardService.pinCounter
+					sconst_1;
+					sadd;
+					putstatic_s 6;		// short project/CardService.pinCounter
+				L25:	goto L32;
+				L26:	aload_1;
+					invokevirtual 14;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 15;		// javacard/framework/APDU.setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 21;		// reference project/Constant.RESPONSE_PIN_CHECK_REACH_LIMIT
+					sconst_0;
+					sconst_1;
+					invokevirtual 17;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					goto L32;
+				L27:	invokestatic 12;		// javacard/framework/JCSystem.beginTransaction()V
+					sconst_0;
+					sstore 4;
+				L28:	sload 4;
+					sconst_4;
+					if_scmpge L30;
+				L29:	getstatic_a 5;		// reference project/CardService.pin
+					sload 4;
+					aload_2;
+					sconst_5;
+					sload 4;
+					sadd;
+					baload;
+					bastore;
+					sinc 4 1;
+					goto L28;
+				L30:	invokestatic 13;		// javacard/framework/JCSystem.commitTransaction()V
+					aload_1;
+					invokevirtual 14;		// javacard/framework/APDU.setOutgoing()S
+					pop;
+					aload_1;
+					sconst_1;
+					invokevirtual 15;		// javacard/framework/APDU.setOutgoingLength(S)V
+					aload_1;
+					getstatic_a 16;		// reference project/Constant.RESPONSE_PIN_CREATE_SUCCESS
+					sconst_0;
+					sconst_1;
+					invokevirtual 17;		// javacard/framework/APDU.sendBytesLong([BSS)V
+					goto L32;
+				L31:	sspush 27904;
+					invokestatic 10;		// javacard/framework/ISOException.throwIt(S)V
+				L32:	return;
+		}
+
+		.method private isPinCreated()Z {
+			.stack 1;
+			.locals 0;
+
+				L0:	sconst_0;
+					sreturn;
+		}
+
+	}
+
+	.class public Constant 1 extends 1.0 {		// extends java/lang/Object
+
+		.fields {
+			public static final byte INS_CREATE_PIN = 0;		// B
+			public static final byte INS_CHANGE_PIN = 1;		// B
+			public static final byte INS_CHECK_PIN = 2;		// B
+			public static final byte CLA = 0;		// B
+			public static final short PIN_LENGTH = 4;		// S
+			public static final byte PIN_DEFAULT = 46;		// B
+			public static final short MAX_PIN_COUNTER = 3;		// S
+			public static final byte[] RESPONSE_SUCCESS 0 = {-112,0};		// [B
+			public static final byte[] RESPONSE_PIN_ALREADY_CREATED 1 = {42};		// [B
+			public static final byte[] RESPONSE_PIN_CREATE_SUCCESS 2 = {43};		// [B
+			public static final byte[] RESPONSE_PIN_CHECK_TRUE 3 = {44};		// [B
+			public static final byte[] RESPONSE_PIN_CHECK_FALSE 4 = {45};		// [B
+			public static final byte[] RESPONSE_PIN_CHECK_REACH_LIMIT 5 = {46};		// [B
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>()V 0 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 22;		// java/lang/Object.<init>()V
+					return;
+		}
+
+	}
+
+}
