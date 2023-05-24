@@ -1,12 +1,24 @@
 package project;
 
 import javacard.framework.*;
+import javacard.security.*;
+import javacardx.crypto.Cipher;
 
 public class CardService extends Applet
 {
-	private static boolean pinCreated = false;
+	// Cac truong thong tin luu tru
 	private static byte[] pin;
+	
+	// Cac bien ho tro logic
+	private static boolean pinCreated = false;
 	private static short pinCounter;
+	private AESKey aesKey;
+	private Cipher cipher;
+	
+	private CardService() {
+		aesKey = (AESKey) KeyBuilder.buildKey(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_128, false);
+		cipher = Cipher.getInstance(Cipher.ALG_AES_BLOCK_128_CBC_NOPAD, false);
+	}
 
 	public static void install(byte[] bArray, short bOffset, byte bLength) 
 	{
@@ -16,11 +28,7 @@ public class CardService extends Applet
 	
 	// minh: init cac du lieu cua lop
 	private static void init() {
-		pin = new byte[Constant.PIN_LENGTH];
-		pinCounter = 0;
-		for (short i=0; i < pin.length; i++) {
-			pin[i] = Constant.PIN_DEFAULT;
-		}
+		pin = new byte[Constant.PIN_WRAPPER_LENGTH];
 	}
 
 	public void process(APDU apdu)
@@ -40,11 +48,9 @@ public class CardService extends Applet
 		case Constant.INS_CREATE_PIN: {
 			if (!pinCreated) {
 				JCSystem.beginTransaction();
-				for (short i=0; i < Constant.PIN_LENGTH; i++) {
-					short index = (short)(ISO7816.OFFSET_CDATA + i);
-					pin[i] = buf[index];
-				}
+				pin = encryptAES(buf);
 				JCSystem.commitTransaction();
+				pin = pin;
 				apdu.setOutgoing();
 				apdu.setOutgoingLength((short)1);
 				apdu.sendBytesLong(Constant.RESPONSE_PIN_CREATE_SUCCESS, (short)0, (short)1);
@@ -60,8 +66,9 @@ public class CardService extends Applet
 		case Constant.INS_CHECK_PIN: {
 			if (pinCounter <= Constant.MAX_PIN_COUNTER) {
 				boolean check = true;
+				byte[] temp = encryptAES(buf);
 				for (short i=0; i < Constant.PIN_LENGTH; i++) {
-					if (pin[i] != buf[(short)(ISO7816.OFFSET_CDATA+i)]) {
+					if (pin[i] != temp[i]) {
 						check = false;
 						break;
 					}
@@ -85,10 +92,9 @@ public class CardService extends Applet
 		}
 		case Constant.INS_CHANGE_PIN: {
 			JCSystem.beginTransaction();
-			for (short i=0; i < Constant.PIN_LENGTH; i++) {
-				pin[i] = buf[(short)(ISO7816.OFFSET_CDATA+i)];
-			}
+			pin = encryptAES(buf);
 			JCSystem.commitTransaction();
+			
 			apdu.setOutgoing();
 			apdu.setOutgoingLength((short)1);
 			apdu.sendBytesLong(Constant.RESPONSE_PIN_CREATE_SUCCESS, (short)0, (short)1);
@@ -97,11 +103,20 @@ public class CardService extends Applet
 		default:
 			ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
 		}
-		
-		
 	}
 	
-	private boolean isPinCreated() {
-		return false;
+	private byte[] encryptAES(byte[] buffer) {
+		byte[] input = new byte[Constant.PIN_WRAPPER_LENGTH];
+		byte[] output = new byte[Constant.PIN_WRAPPER_LENGTH];
+		
+		for (short i=0; i < Constant.PIN_LENGTH; i++) {
+			input[i] = buffer[(short)(ISO7816.OFFSET_CDATA+i)];
+		}
+		
+		aesKey.setKey(Constant.KEY_AES, (short)0);
+		cipher.init(aesKey, Cipher.MODE_ENCRYPT);
+		cipher.doFinal(input, (short)0, (short)input.length, output, (short)0);
+		
+		return output;
 	}
 }
