@@ -6,6 +6,10 @@ import javacardx.crypto.Cipher;
 
 public class CardService extends Applet
 {
+	//TODO them id cua the, 
+	private static final byte[] idCard = new byte[] {(byte)0x30, (byte)0x32, (byte)0x35, (byte)0x36, (byte)0x34};
+	//TODO rsa sinh 2 key public key, private key. 2key nay sinh ra tai card va publick key duoc gui cho server, private giu lai
+	
 	// Cac truong thong tin luu tru
 	private static byte[] pin;
 	// Thong tin sinh vine
@@ -17,6 +21,8 @@ public class CardService extends Applet
 	private static byte[] phone;
 	private static byte[] studentId;
 	private static byte[] classSV;
+	// Thong tin lich su gui xe
+	private static LichSuGuiXe historyVehicle;
 	
 	// Cac bien ho tro logic
 	private static boolean pinCreated = false; // trang thai pin da duoc tao hay chua
@@ -46,6 +52,7 @@ public class CardService extends Applet
 		pin = new byte[Constant.PIN_WRAPPER_LENGTH];
 		pinCounter = 1;
 		avatar = new byte[Constant.AVATAR_LENGTH];
+		historyVehicle = new LichSuGuiXe();
 	}
 
 	public void process(APDU apdu)
@@ -62,6 +69,10 @@ public class CardService extends Applet
 		}
 		
 		switch (buf[ISO7816.OFFSET_INS]){
+		case Constant.INS_VALID_ID_CARD: {
+			sendResponse(apdu, idCard);
+			break;
+		}
 		case Constant.INS_CREATE_PIN: {
 			if (!pinCreated) {
 				JCSystem.beginTransaction();
@@ -215,6 +226,17 @@ public class CardService extends Applet
 			}
 			break;
 		}
+		case Constant.INS_CHECK_IN_VEHICLE: {
+			JCSystem.beginTransaction();
+			short trangThai = buf[ISO7816.OFFSET_P1];
+			byte[] thoiGian = new byte[7];
+			Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, thoiGian, (short)0, (short)7);
+			historyVehicle.addLichSuMoi(new GuiXeRecord(thoiGian, trangThai));
+			JCSystem.commitTransaction();
+			
+			sendResponse(apdu, Constant.RESPONSE_GUI_XE_OK);
+			break;
+		}
 		default:
 			ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
 		}
@@ -364,6 +386,8 @@ public class CardService extends Applet
 		}
 	}
 	
+	/** 
+	*/
 	private void resetInfo() {
 		JCSystem.beginTransaction();
 		// reset bien
