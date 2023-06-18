@@ -2,13 +2,21 @@ package project;
 
 import javacard.framework.*;
 import javacard.security.*;
-import javacardx.crypto.Cipher;
+import javacardx.crypto.*;
 
 public class CardService extends Applet
 {
-	//TODO them id cua the, 
+	// id the mac dinh
 	private static final byte[] idCard = new byte[] {(byte)0x30, (byte)0x32, (byte)0x35, (byte)0x36, (byte)0x34};
-	//TODO rsa sinh 2 key public key, private key. 2key nay sinh ra tai card va publick key duoc gui cho server, private giu lai
+	// Khoa rsa 
+	private RSAPrivateKey rsaPrivKey;
+	private RSAPublicKey rsaPubKey;
+	private Signature rsaSig;
+	private byte[] s1, s2, s3, sig_buffer;
+	private short sigLen;
+	
+	// Ham bam
+	private MessageDigest sha;
 	
 	// Cac truong thong tin luu tru
 	private static byte[] pin;
@@ -39,20 +47,34 @@ public class CardService extends Applet
 	private CardService() {
 		aesKey = (AESKey) KeyBuilder.buildKey(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_128, false);
 		cipher = Cipher.getInstance(Cipher.ALG_AES_BLOCK_128_CBC_NOPAD, false);
+		pin = new byte[Constant.PIN_WRAPPER_LENGTH];
+		pinCounter = 1;
+		avatar = new byte[Constant.AVATAR_LENGTH];
+		historyVehicle = new LichSuGuiXe();
+		// RSA
+		createRsaVariables();
+		// HASH
+		sha = MessageDigest.getInstance(MessageDigest.ALG_SHA, false);
+	}
+	
+	private void createRsaVariables() {
+		// Khoi tao cac bien rsa
+		sigLen = (short)(KeyBuilder.LENGTH_RSA_1024/8);
+		sig_buffer = new byte[sigLen];
+		
+		rsaSig = Signature.getInstance(Signature.ALG_RSA_SHA_PKCS1, false);
+		rsaPrivKey = (RSAPrivateKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PRIVATE, (short)(8*sigLen), false);
+		rsaPubKey = (RSAPublicKey) KeyBuilder.buildKey(KeyBuilder.TYPE_RSA_PUBLIC, (short)(8*sigLen), false);
+		
+		KeyPair keyPair = new KeyPair(KeyPair.ALG_RSA,(short)(8*sigLen));
+		keyPair.genKeyPair();
+		rsaPrivKey = (RSAPrivateKey)keyPair.getPrivate();
+		rsaPubKey = (RSAPublicKey)keyPair.getPublic();
 	}
 
 	public static void install(byte[] bArray, short bOffset, byte bLength) 
 	{
 		new CardService().register(bArray, (short) (bOffset + 1), bArray[bOffset]);
-		init();
-	}
-	
-	// minh: init cac du lieu cua lop
-	private static void init() {
-		pin = new byte[Constant.PIN_WRAPPER_LENGTH];
-		pinCounter = 1;
-		avatar = new byte[Constant.AVATAR_LENGTH];
-		historyVehicle = new LichSuGuiXe();
 	}
 
 	public void process(APDU apdu)
@@ -237,6 +259,36 @@ public class CardService extends Applet
 			sendResponse(apdu, Constant.RESPONSE_GUI_XE_OK);
 			break;
 		}
+		case Constant.INS_GET_PUB_KEY_RSA: {
+			byte choice = buf[ISO7816.OFFSET_P1];
+			switch (choice) {
+			case Constant.PARAM_MODULUS: {
+				byte[] pubKey = new byte[(short) (sigLen * 2)];
+				short pubKeyLen = rsaPubKey.getModulus(pubKey, (short)0);
+				sendResponse(apdu, pubKey, pubKeyLen);
+				break;
+			}
+			case Constant.PARAM_EXPONENT: {
+				byte[] pubKey = new byte[(short) (sigLen * 2)];
+				short pubKeyLen = rsaPubKey.getExponent(pubKey, (short)0);
+				sendResponse(apdu, pubKey, pubKeyLen);
+				break;
+			}
+			}
+			
+			break;
+		}
+		case Constant.INS_CHALLENGE_CARD: {
+			short len = apdu.getIncomingLength();
+			byte[] data = new byte[len];
+			byte[] hash = new byte[255];
+			
+			Util.arrayCopy(buf, (short)(apdu.getOffsetCdata()), data, (short)0, len);
+			short ret = sha.doFinal(data, (short)0, len, hash, (short)0);
+			// sendResponse(apdu, hash, ret);
+			rsaSign(apdu, hash, ret);
+			break;
+		}
 		default:
 			ISOException.throwIt(ISO7816.SW_INS_NOT_SUPPORTED);
 		}
@@ -279,6 +331,12 @@ public class CardService extends Applet
 		apdu.setOutgoing();
 		apdu.setOutgoingLength((short)data.length);
 		apdu.sendBytesLong(data, (short)0, (short)data.length);
+	}
+	
+	private void sendResponse(APDU apdu, byte[] data, short len) {
+		apdu.setOutgoing();
+		apdu.setOutgoingLength(len);
+		apdu.sendBytesLong(data, (short)0, len);
 	}
 	
 	private void flushInfo(APDU apdu, byte[] buf) {
@@ -367,6 +425,7 @@ public class CardService extends Applet
 	}
 	
 	private void checkPin(byte[] buf, APDU apdu) {
+		
 		boolean check = true;
 		byte[] temp = encryptAES(buf);
 		for (short i=0; i < Constant.PIN_LENGTH; i++) {
@@ -387,6 +446,7 @@ public class CardService extends Applet
 	}
 	
 	/** 
+	* Xoa sach thong tin trong the
 	*/
 	private void resetInfo() {
 		JCSystem.beginTransaction();
@@ -409,4 +469,17 @@ public class CardService extends Applet
 		classSV = null;
 		JCSystem.commitTransaction();
 	}
+	
+	/** 
+	* Ki doan du lieu data bang rsa va gui di
+	*/
+	private void rsaSign(APDU apdu, byte[] data, short dataLen) {
+		rsaSig.init(rsaPrivKey, Signature.MODE_SIGN);
+		short ret = rsaSig.sign(data, (short)0, dataLen, sig_buffer, (short)0);
+		apdu.setOutgoing();
+		apdu.setOutgoingLength(ret);
+		apdu.sendBytesLong(sig_buffer, (short)0, ret);
+	}
+	
+	
 }
