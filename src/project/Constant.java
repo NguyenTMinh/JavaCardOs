@@ -1,5 +1,5 @@
 package project;
-
+ 
 public class Constant {
 	// Danh sach cac instruction trong the ho tro
 	// minh: ins tao ma pin cho the
@@ -18,6 +18,14 @@ public class Constant {
     public static final byte INS_EDIT_DATA = (byte)0x06;
     // reset trang the
     public static final byte INS_RESET_DATA = (byte)0x07;
+    // cap nhat trang thai gui xe, lich su gui xe
+    public static final byte INS_CHECK_IN_VEHICLE = (byte)0x08;
+    // valid id the
+    public static final byte INS_VALID_ID_CARD= (byte)0x09;
+    // lay rsa key
+    public static final byte INS_GET_PUB_KEY_RSA = (byte)0x10;
+    // lay rsa key
+    public static final byte INS_CHALLENGE_CARD= (byte)0x11;
 	
 	//====================================================
 	public static final byte CLA = (byte) 0x00;
@@ -39,6 +47,7 @@ public class Constant {
 	public static final byte[] RESPONSE_PIN_CHECK_REACH_LIMIT = new byte[] {(byte)0x2E};
 	public static final byte[] RESPONSE_RESET_INFO_SUCCESS = new byte[] {(byte)0x2F};
 	public static final byte[] RESPONSE_RESET_INFO_FAIL = new byte[] {(byte)0x30};
+	public static final byte[] RESPONSE_GUI_XE_OK = new byte[] {(byte)0x31};
 	
 	//====================================================
 	// Khoa AES
@@ -53,5 +62,9 @@ public class Constant {
     public static final byte PARAM_LOP = (byte)0x05;
     public static final byte PARAM_AVATAR = (byte)0x06;
     public static final byte PARAM_ID = (byte)0x07;
+    
+    //param card
+    public static final byte PARAM_MODULUS = (byte)0x08;
+    public static final byte PARAM_EXPONENT = (byte)0x09;
     
 }
