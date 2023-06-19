@@ -31,6 +31,9 @@ public class CardService extends Applet
 	private static byte[] classSV;
 	// Thong tin lich su gui xe
 	private static LichSuGuiXe historyVehicle;
+	private static short indexLSX = (short)0;
+	private static short indexLSS = (short)0;
+	private static LichSuMuonSach historyBook;
 	
 	// Cac bien ho tro logic
 	private static boolean pinCreated = false; // trang thai pin da duoc tao hay chua
@@ -51,6 +54,7 @@ public class CardService extends Applet
 		pinCounter = 1;
 		avatar = new byte[Constant.AVATAR_LENGTH];
 		historyVehicle = new LichSuGuiXe();
+		historyBook = new LichSuMuonSach();
 		// RSA
 		createRsaVariables();
 		// HASH
@@ -249,12 +253,20 @@ public class CardService extends Applet
 			break;
 		}
 		case Constant.INS_CHECK_IN_VEHICLE: {
-			JCSystem.beginTransaction();
 			short trangThai = buf[ISO7816.OFFSET_P1];
 			byte[] thoiGian = new byte[7];
 			Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, thoiGian, (short)0, (short)7);
 			historyVehicle.addLichSuMoi(new GuiXeRecord(thoiGian, trangThai));
-			JCSystem.commitTransaction();
+			
+			sendResponse(apdu, Constant.RESPONSE_GUI_XE_OK);
+			break;
+		}
+		case Constant.INS_BOOK: {
+			short trangThai = buf[ISO7816.OFFSET_P1];
+			short id = buf[ISO7816.OFFSET_P2];
+			byte[] thoiGian = new byte[7];
+			Util.arrayCopy(buf, (short)ISO7816.OFFSET_CDATA, thoiGian, (short)0, (short)7);
+			historyBook.addLichSuMoi(new SachRecord(thoiGian, trangThai, id));
 			
 			sendResponse(apdu, Constant.RESPONSE_GUI_XE_OK);
 			break;
@@ -287,6 +299,91 @@ public class CardService extends Applet
 			short ret = sha.doFinal(data, (short)0, len, hash, (short)0);
 			// sendResponse(apdu, hash, ret);
 			rsaSign(apdu, hash, ret);
+			break;
+		}
+		case Constant.INS_GET_LS_XE: {
+			byte[] respone = new byte[9];
+			if (historyVehicle.isEmpty()) {
+				sendResponse(apdu, new byte[]{(byte)0x00});
+				break;
+			}
+			GuiXeRecord rc = historyVehicle.getLichSu()[indexLSX];
+			if (rc == null) {
+				sendResponse(apdu, new byte[]{(byte)0x00});
+				break;
+			}
+			if (historyVehicle.getCurrentIndex() <= indexLSX) {
+				indexLSX = (short)0;
+				respone[0] = (byte)0x00;
+				respone[1] = (byte)(rc.getTrangThai());
+				respone[2] = rc.getThoiGian()[Constant.INDEX_NGAY];
+				respone[3] = rc.getThoiGian()[Constant.INDEX_THANG];
+				respone[4] = rc.getThoiGian()[Constant.INDEX_NAM_0];
+				respone[5] = rc.getThoiGian()[Constant.INDEX_NAM_1];
+				respone[6] = rc.getThoiGian()[Constant.INDEX_GIO];
+				respone[7] = rc.getThoiGian()[Constant.INDEX_PHUT];
+				respone[8] = rc.getThoiGian()[Constant.INDEX_GIAY];
+				
+				sendResponse(apdu, respone);
+			} else {
+				indexLSX++;
+				
+				respone[0] = Constant.RESPONSE_HAS_NEXT;
+				respone[1] = (byte)rc.getTrangThai();
+				respone[2] = rc.getThoiGian()[Constant.INDEX_NGAY];
+				respone[3] = rc.getThoiGian()[Constant.INDEX_THANG];
+				respone[4] = rc.getThoiGian()[Constant.INDEX_NAM_0];
+				respone[5] = rc.getThoiGian()[Constant.INDEX_NAM_1];
+				respone[6] = rc.getThoiGian()[Constant.INDEX_GIO];
+				respone[7] = rc.getThoiGian()[Constant.INDEX_PHUT];
+				respone[8] = rc.getThoiGian()[Constant.INDEX_GIAY];
+				
+				sendResponse(apdu, respone);
+			}
+			break;
+		}
+		case Constant.INS_GET_LS_SACH: {
+			byte[] respone = new byte[10];
+			if (historyBook.isEmpty()) {
+				sendResponse(apdu, new byte[]{(byte)0x00});
+				break;
+			}
+			SachRecord rc = historyBook.getLichSu()[indexLSS];
+			if (rc == null) {
+				indexLSS = (short)0;
+				sendResponse(apdu, new byte[]{(byte)0x00});
+				break;
+			}
+			if (historyBook.getCurrentIndex() <= indexLSS) {
+				indexLSS = (short)0;
+				respone[0] = (byte)0x00;
+				respone[1] = (byte)(rc.getTrangThai());
+				respone[2] = rc.getThoiGian()[Constant.INDEX_NGAY];
+				respone[3] = rc.getThoiGian()[Constant.INDEX_THANG];
+				respone[4] = rc.getThoiGian()[Constant.INDEX_NAM_0];
+				respone[5] = rc.getThoiGian()[Constant.INDEX_NAM_1];
+				respone[6] = rc.getThoiGian()[Constant.INDEX_GIO];
+				respone[7] = rc.getThoiGian()[Constant.INDEX_PHUT];
+				respone[8] = rc.getThoiGian()[Constant.INDEX_GIAY];
+				respone[9] = (byte)(rc.getIdSach());
+				
+				sendResponse(apdu, respone);
+			} else {
+				indexLSS++;
+				
+				respone[0] = Constant.RESPONSE_HAS_NEXT;
+				respone[1] = (byte)rc.getTrangThai();
+				respone[2] = rc.getThoiGian()[Constant.INDEX_NGAY];
+				respone[3] = rc.getThoiGian()[Constant.INDEX_THANG];
+				respone[4] = rc.getThoiGian()[Constant.INDEX_NAM_0];
+				respone[5] = rc.getThoiGian()[Constant.INDEX_NAM_1];
+				respone[6] = rc.getThoiGian()[Constant.INDEX_GIO];
+				respone[7] = rc.getThoiGian()[Constant.INDEX_PHUT];
+				respone[8] = rc.getThoiGian()[Constant.INDEX_GIAY];
+				respone[9] = (byte)(rc.getIdSach());
+				
+				sendResponse(apdu, respone);
+			}
 			break;
 		}
 		default:
@@ -467,6 +564,9 @@ public class CardService extends Applet
 		phone = null;
 		studentId = null;
 		classSV = null;
+		//
+		historyBook = new LichSuMuonSach();
+		historyVehicle = new LichSuGuiXe();
 		JCSystem.commitTransaction();
 	}
 	

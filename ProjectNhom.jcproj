@@ -5,6 +5,8 @@
 <CLASS name="Constant"/>
 <CLASS name="LichSuGuiXe"/>
 <CLASS name="GuiXeRecord"/>
+<CLASS name="SachRecord"/>
+<CLASS name="LichSuMuonSach"/>
 </PKG>
 <Libs/>
 </USER>

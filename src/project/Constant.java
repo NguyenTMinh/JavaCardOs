@@ -26,6 +26,12 @@ public class Constant {
     public static final byte INS_GET_PUB_KEY_RSA = (byte)0x10;
     // lay rsa key
     public static final byte INS_CHALLENGE_CARD= (byte)0x11;
+    // muon sach
+    public static final byte INS_BOOK = (byte)0x12;
+    // ls xe
+    public static final byte INS_GET_LS_XE = (byte)0x13;
+    // ls sach
+    public static final byte INS_GET_LS_SACH = (byte)0x14;
 	
 	//====================================================
 	public static final byte CLA = (byte) 0x00;
@@ -48,6 +54,7 @@ public class Constant {
 	public static final byte[] RESPONSE_RESET_INFO_SUCCESS = new byte[] {(byte)0x2F};
 	public static final byte[] RESPONSE_RESET_INFO_FAIL = new byte[] {(byte)0x30};
 	public static final byte[] RESPONSE_GUI_XE_OK = new byte[] {(byte)0x31};
+	public static final byte RESPONSE_HAS_NEXT = (byte)0x32;
 	
 	//====================================================
 	// Khoa AES
@@ -67,4 +74,19 @@ public class Constant {
     public static final byte PARAM_MODULUS = (byte)0x08;
     public static final byte PARAM_EXPONENT = (byte)0x09;
     
+    // thoi gian
+    // Bieu dien thoi gian theo quy tac mang 7 byte, theo quy tac
+	// byte dau tuong trung cho ngay,
+	// byte 2 tuong trung cho thang
+	// byte 3,4 tuong trung cho nam
+	// byte 5 tuong trung cho gio
+	// byte 6 tuong trung cho phut
+	// byte 7 tuong trung cho giay
+    public static final short INDEX_NGAY = (short)0;
+	public static final short INDEX_THANG = (short)1;
+	public static final short INDEX_NAM_0 = (short)2;
+	public static final short INDEX_NAM_1 = (short)3;
+	public static final short INDEX_GIO = (short)4;
+	public static final short INDEX_PHUT = (short)5;
+	public static final short INDEX_GIAY = (short)6;
 }
