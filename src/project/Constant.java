@@ -40,7 +40,7 @@ public class Constant {
 	public static final byte PIN_DEFAULT = (byte) 0x2E;
 	public static final short MAX_PIN_COUNTER = (short)5;
 	public static final byte[] SECRET_UNLOCK_KEY = {0x33, 0x33, 0x30, 0x32};
-	public static final short AVATAR_LENGTH = (short)32767;
+	public static final short AVATAR_LENGTH = (short)32752; //32767
 	public static final short MAX_SIZE_APDU = (short)255;
 	public static final short MAX_SIZE_TEXT = (short) 1000;
 	

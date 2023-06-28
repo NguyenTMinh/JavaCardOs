@@ -23,12 +23,19 @@ public class CardService extends Applet
 	// Thong tin sinh vine
 	private static byte id;
 	private static byte[] avatar;
+	private static short avatarLen;
 	private static byte[] name;
+	private static short nameLen;
 	private static byte gender;
 	private static byte[] date;
+	private static short dateLen;
 	private static byte[] phone;
+	private static short phoneLen;
 	private static byte[] studentId;
+	private static short studentIdLen;
 	private static byte[] classSV;
+	private static short classSVLen;
+	
 	// Thong tin lich su gui xe
 	private static LichSuGuiXe historyVehicle;
 	private static short indexLSX = (short)0;
@@ -46,6 +53,7 @@ public class CardService extends Applet
 	private static short avatarSize;
 	private static short avatarLengthRemain = (short)0;
 	private static byte[] temp; // temp tam de tra avatar
+	private byte[] avatarDecryptTemp; // mang chua avatar duoc giai ma tam thoi, chi dung khi gui thong tin len app, xoa ngay lap tuc khi khong dung
 	
 	private CardService() {
 		aesKey = (AESKey) KeyBuilder.buildKey(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_128, false);
@@ -178,6 +186,10 @@ public class CardService extends Applet
 		}
 		case Constant.INS_GET_DATA: {
 			byte choice = buf[ISO7816.OFFSET_P1];
+			// decrypt avatar truoc da
+			if (avatarDecryptTemp == null) {
+				avatarDecryptTemp = aesDecrypt(avatar);
+			}
 			switch(choice) {
 			case Constant.PARAM_ID:{
 				byte[] resp = new byte[]{id};
@@ -192,7 +204,7 @@ public class CardService extends Applet
 				} else {
 					temp = new byte[(short)(avatarLengthRemain)];
 				}
-				Util.arrayCopy(avatar, offsetIndexSendData, temp, (short)0, (short)temp.length);
+				Util.arrayCopy(avatarDecryptTemp, offsetIndexSendData, temp, (short)0, (short)temp.length);
 				offsetIndexSendData += (short)temp.length;
 				avatarLengthRemain = (short)(avatarLengthRemain-temp.length);
 				
@@ -200,34 +212,49 @@ public class CardService extends Applet
 				break;
 			}
 			case Constant.PARAM_HO_TEN: {
+				avatarDecryptTemp = null;
 				temp = null;
 				avatarLengthRemain = avatarSize;
 				offsetIndexSendData = (short)0;
+				// giai ma thong tin bi ma hoa roi moi gui len
+				byte[] temp = aesDecrypt(name);
 				
-				sendResponse(apdu, name);
+				sendResponse(apdu, temp, nameLen);
+				temp = null;
 				break;
 			}
 			case Constant.PARAM_GIOI_TINH: {
 				sendResponse(apdu, new byte[]{gender});
+				
 				break;
 			}
 			case Constant.PARAM_NGAY_SINH: {
-				sendResponse(apdu, date);
+				// giai ma thong tin bi ma hoa roi moi gui len
+				byte[] temp = aesDecrypt(date);
+				sendResponse(apdu, temp, dateLen);
+				temp = null;
 				break;
 			}
 			case Constant.PARAM_DIEN_THOAI: {
-				sendResponse(apdu, phone);
+				byte[] temp = aesDecrypt(phone);
+				sendResponse(apdu, temp, phoneLen);
+				temp = null;
 				break;
 			}
 			case Constant.PARAM_MSV: {
-				sendResponse(apdu, studentId);
+				byte[] temp = aesDecrypt(studentId);
+				sendResponse(apdu, temp, studentIdLen);
+				temp = null;
 				break;
 			}
 			case Constant.PARAM_LOP: {
-				sendResponse(apdu, classSV);
+				byte[] temp = aesDecrypt(classSV);
+				sendResponse(apdu, temp, classSVLen);
+				temp = null;
 				break;
 			}
 			}
+			
 			break;
 		}
 		case Constant.INS_EDIT_DATA: {
@@ -437,12 +464,10 @@ public class CardService extends Applet
 	}
 	
 	private void flushInfo(APDU apdu, byte[] buf) {
-		JCSystem.beginTransaction();
 		byte choice = buf[ISO7816.OFFSET_P1];
 		switch (choice) {
 			case Constant.PARAM_ID: {
 				id = buf[ISO7816.OFFSET_P2];
-				JCSystem.commitTransaction();
 				
 				apdu.setOutgoing();
 				apdu.setOutgoingLength((short)1);
@@ -455,65 +480,72 @@ public class CardService extends Applet
 				Util.arrayCopy(buf, dataOffset, avatar, offsetIndexReceiveData, dataLength);
 				offsetIndexReceiveData += dataLength;
 				
-				JCSystem.commitTransaction();
-				
 				byte[] leg = shortToByteArray((short)avatar.length, (short)0);
 				
 				sendResponse(apdu, leg);
 				break;
 			}
 			case Constant.PARAM_HO_TEN: {
+				// Chuyen het avatar xuong roi moi ma hoa - start
 				avatarSize = (short)(offsetIndexReceiveData);
 				avatarLengthRemain = avatarSize;
 				offsetIndexReceiveData = (short)0;
 				
-				short nameLength = apdu.getIncomingLength();
-				name = new byte[nameLength];
-				Util.arrayCopy(buf,(short)(apdu.getOffsetCdata()),name,(short)0,nameLength);
-				JCSystem.commitTransaction();
+				avatar = aesEncrypt(avatar);
+				avatarLen = avatarSize;
+				// ma hoa avatar - end
+				
+				nameLen = apdu.getIncomingLength();
+				name = new byte[getLengthForEncrypt(nameLen)];
+				Util.arrayCopy(buf,(short)(apdu.getOffsetCdata()),name,(short)0,nameLen);
+				// Luu du lieu da duoc ma hoa
+				name = aesEncrypt(name);
 				
 				sendResponse(apdu, new byte[1]);
 				break;
 			}
 			case Constant.PARAM_GIOI_TINH: {
 				gender = buf[ISO7816.OFFSET_P2];
-				JCSystem.commitTransaction();
 				
 				sendResponse(apdu, new byte[1]);
 				break;
 			}
 			case Constant.PARAM_NGAY_SINH: {
-				short ngaySinhLength = apdu.getIncomingLength();
-				date = new byte[ngaySinhLength];
-				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,date,(short)0,ngaySinhLength);
-				JCSystem.commitTransaction();
+				dateLen = apdu.getIncomingLength();
+				date = new byte[getLengthForEncrypt(dateLen)];
+				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,date,(short)0,dateLen);
+				// Luu thong tin ma hoa
+				date = aesEncrypt(date);
 				
 				sendResponse(apdu, new byte[1]);
 				break;
 			}
 			case Constant.PARAM_DIEN_THOAI: {
-				short dienThoaiLength = apdu.getIncomingLength();
-				phone = new byte[dienThoaiLength];
-				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,phone,(short)0,dienThoaiLength);
-				JCSystem.commitTransaction();
+				phoneLen = apdu.getIncomingLength();
+				phone = new byte[getLengthForEncrypt(phoneLen)];
+				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,phone,(short)0,phoneLen);
+				// Luu thong tin ma hoa
+				phone = aesEncrypt(phone);
 				
 				sendResponse(apdu, new byte[1]);
 				break;
 			}
 			case Constant.PARAM_MSV: {
-				short msvLength= apdu.getIncomingLength();
-				studentId = new byte[msvLength];
-				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,studentId,(short)0,msvLength);
-				JCSystem.commitTransaction();
+				studentIdLen = apdu.getIncomingLength();
+				studentId = new byte[getLengthForEncrypt(studentIdLen)];
+				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,studentId,(short)0,studentIdLen);
+				// Luu thong tin ma hoa
+				studentId = aesEncrypt(studentId);
 				
 				sendResponse(apdu, new byte[1]);
 				break;
 			}
 			case Constant.PARAM_LOP: {
-				short lopLength = apdu.getIncomingLength();
-				classSV = new byte[lopLength];
-				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,classSV,(short)0,lopLength);
-				JCSystem.commitTransaction();
+				classSVLen = apdu.getIncomingLength();
+				classSV = new byte[getLengthForEncrypt(classSVLen)];
+				Util.arrayCopy(buf,(short)ISO7816.OFFSET_CDATA,classSV,(short)0,classSVLen);
+				// Luu thong tin ma hoa
+				classSV = aesEncrypt(classSV);
 				
 				sendResponse(apdu, new byte[1]);
 				break;
@@ -581,5 +613,34 @@ public class CardService extends Applet
 		apdu.sendBytesLong(sig_buffer, (short)0, ret);
 	}
 	
+	private short getLengthForEncrypt(short initLeng) {
+		short st = (short)16;
+		if (initLeng % st == (short)0) {
+			return initLeng;
+		} else {
+			return (short)(((int)initLeng / st) * st + st);
+		}
+	}
 	
+	// Ma hoa aes dau vao
+	private byte[] aesEncrypt(byte[] input) {
+		byte[] output = new byte[(short)input.length];
+		
+		aesKey.setKey(Constant.KEY_AES, (short)0);
+		cipher.init(aesKey, Cipher.MODE_ENCRYPT);
+		cipher.doFinal(input, (short)0, (short)input.length, output, (short)0);
+		
+		return output;
+	}
+	
+	// Giai ma aes
+	private byte[] aesDecrypt(byte[] input) {
+		byte[] output = new byte[(short)input.length];
+		
+		aesKey.setKey(Constant.KEY_AES, (short)0);
+		cipher.init(aesKey, Cipher.MODE_DECRYPT);
+		cipher.doFinal(input, (short)0, (short)input.length, output, (short)0);
+		
+		return output;
+	}
 }
