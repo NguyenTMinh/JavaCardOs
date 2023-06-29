@@ -1,5 +1,5 @@
 // converted by version 1.3
-// on Wed Jun 28 22:35:30 ICT 2023
+// on Thu Jun 29 12:01:22 ICT 2023
 
 .package project {
 	.aid 0x11:0x22:0x33:0x44:0x55;
@@ -34,29 +34,31 @@
 		// 7
 		instanceFieldRef 1.9 CardService/rsaPubKey;
 		// 8
-		instanceFieldRef byte[] CardService/avatarDecryptTemp;
-		// 9
 		instanceFieldRef byte[] GuiXeRecord/thoiGian;
-		// 10
+		// 9
 		instanceFieldRef short GuiXeRecord/trangThai;
-		// 11
+		// 10
 		instanceFieldRef GuiXeRecord[] LichSuGuiXe/lichSu;
-		// 12
+		// 11
 		instanceFieldRef short LichSuGuiXe/currentIndex;
-		// 13
+		// 12
 		instanceFieldRef boolean LichSuGuiXe/isEmpty;
-		// 14
+		// 13
 		instanceFieldRef SachRecord[] LichSuMuonSach/lichSu;
-		// 15
+		// 14
 		instanceFieldRef short LichSuMuonSach/currentIndex;
-		// 16
+		// 15
 		instanceFieldRef boolean LichSuMuonSach/isEmpty;
-		// 17
+		// 16
 		instanceFieldRef short SachRecord/trangThai;
-		// 18
+		// 17
 		instanceFieldRef byte[] SachRecord/thoiGian;
-		// 19
+		// 18
 		instanceFieldRef short SachRecord/idSach;
+		// 19
+		staticMethodRef 2.1.0(BZ)Ljavacardx/crypto/Cipher;;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+			.descriptor	Ljavacardx/crypto/Cipher;	2.1;
+
 		// 20
 		staticMethodRef 1.15.0(BZ)Ljavacard/security/Signature;;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
 			.descriptor	Ljavacard/security/Signature;	1.15;
@@ -144,155 +146,159 @@
 			.descriptor	Ljavacard/framework/APDU;	0.10;
 
 		// 56
-		staticFieldRef byte[] CardService/avatar;
+		staticFieldRef byte[] CardService/avatarDecryptTemp;
 		// 57
-		staticMethodRef CardService/aesDecrypt([B)[B;
+		staticFieldRef boolean CardService/doneGetData;
 		// 58
-		staticFieldRef byte CardService/id;
+		staticMethodRef CardService/aesDecrypt([B)[B;
 		// 59
-		staticFieldRef short CardService/avatarLengthRemain;
+		staticFieldRef byte CardService/id;
 		// 60
-		staticFieldRef byte[] CardService/temp;
+		staticFieldRef short CardService/avatarLengthRemain;
 		// 61
-		staticFieldRef short CardService/offsetIndexSendData;
+		staticFieldRef byte[] CardService/temp;
 		// 62
-		staticMethodRef 0.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+		staticFieldRef short CardService/offsetIndexSendData;
 		// 63
-		staticFieldRef short CardService/avatarSize;
+		staticMethodRef 0.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 		// 64
-		staticFieldRef byte[] CardService/name;
+		staticFieldRef short CardService/avatarSize;
 		// 65
-		staticFieldRef short CardService/nameLen;
+		staticFieldRef byte[] CardService/name;
 		// 66
+		staticFieldRef short CardService/nameLen;
+		// 67
 		staticMethodRef CardService/sendResponse(Ljavacard/framework/APDU;[BS)V;
 			.descriptor	Ljavacard/framework/APDU;	0.10;
 
-		// 67
-		staticFieldRef byte CardService/gender;
 		// 68
-		staticFieldRef byte[] CardService/date;
+		staticFieldRef byte CardService/gender;
 		// 69
-		staticFieldRef short CardService/dateLen;
+		staticFieldRef byte[] CardService/date;
 		// 70
-		staticFieldRef byte[] CardService/phone;
+		staticFieldRef short CardService/dateLen;
 		// 71
-		staticFieldRef short CardService/phoneLen;
+		staticFieldRef byte[] CardService/phone;
 		// 72
-		staticFieldRef byte[] CardService/studentId;
+		staticFieldRef short CardService/phoneLen;
 		// 73
-		staticFieldRef short CardService/studentIdLen;
+		staticFieldRef byte[] CardService/studentId;
 		// 74
-		staticFieldRef byte[] CardService/classSV;
+		staticFieldRef short CardService/studentIdLen;
 		// 75
-		staticFieldRef short CardService/classSVLen;
+		staticFieldRef byte[] CardService/classSV;
 		// 76
-		staticMethodRef CardService/resetInfo()V;
+		staticFieldRef short CardService/classSVLen;
 		// 77
-		staticFieldRef byte[] Constant/RESPONSE_RESET_INFO_SUCCESS;
+		staticMethodRef CardService/resetInfo()V;
 		// 78
-		classRef GuiXeRecord;
+		staticFieldRef byte[] Constant/RESPONSE_RESET_INFO_SUCCESS;
 		// 79
-		staticMethodRef GuiXeRecord/<init>([BS)V;
+		classRef GuiXeRecord;
 		// 80
-		virtualMethodRef LichSuGuiXe/addLichSuMoi(Lproject/GuiXeRecord;)V;
+		staticMethodRef GuiXeRecord/<init>([BS)V;
 		// 81
-		staticFieldRef byte[] Constant/RESPONSE_GUI_XE_OK;
+		virtualMethodRef LichSuGuiXe/addLichSuMoi(Lproject/GuiXeRecord;)V;
 		// 82
-		classRef SachRecord;
+		staticFieldRef byte[] Constant/RESPONSE_GUI_XE_OK;
 		// 83
-		staticMethodRef SachRecord/<init>([BSS)V;
+		classRef SachRecord;
 		// 84
-		virtualMethodRef LichSuMuonSach/addLichSuMoi(Lproject/SachRecord;)V;
+		staticMethodRef SachRecord/<init>([BSS)V;
 		// 85
-		virtualMethodRef 0.10.15()S;		// getIncomingLength()S
+		virtualMethodRef LichSuMuonSach/addLichSuMoi(Lproject/SachRecord;)V;
 		// 86
-		virtualMethodRef 0.10.16()S;		// getOffsetCdata()S
+		virtualMethodRef 0.10.15()S;		// getIncomingLength()S
 		// 87
-		virtualMethodRef 1.11.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		virtualMethodRef 0.10.16()S;		// getOffsetCdata()S
 		// 88
+		virtualMethodRef 1.11.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 89
 		staticMethodRef CardService/rsaSign(Ljavacard/framework/APDU;[BS)V;
 			.descriptor	Ljavacard/framework/APDU;	0.10;
 
-		// 89
-		virtualMethodRef LichSuGuiXe/isEmpty()Z;
 		// 90
-		virtualMethodRef LichSuGuiXe/getLichSu()[Lproject/GuiXeRecord;;
+		virtualMethodRef LichSuGuiXe/isEmpty()Z;
 		// 91
-		staticFieldRef short CardService/indexLSX;
+		virtualMethodRef LichSuGuiXe/getLichSu()[Lproject/GuiXeRecord;;
 		// 92
-		virtualMethodRef LichSuGuiXe/getCurrentIndex()S;
+		staticFieldRef short CardService/indexLSX;
 		// 93
-		virtualMethodRef GuiXeRecord/getTrangThai()S;
+		virtualMethodRef LichSuGuiXe/getCurrentIndex()S;
 		// 94
-		virtualMethodRef GuiXeRecord/getThoiGian()[B;
+		virtualMethodRef GuiXeRecord/getTrangThai()S;
 		// 95
-		virtualMethodRef LichSuMuonSach/isEmpty()Z;
+		virtualMethodRef GuiXeRecord/getThoiGian()[B;
 		// 96
-		virtualMethodRef LichSuMuonSach/getLichSu()[Lproject/SachRecord;;
+		virtualMethodRef LichSuMuonSach/isEmpty()Z;
 		// 97
-		staticFieldRef short CardService/indexLSS;
+		virtualMethodRef LichSuMuonSach/getLichSu()[Lproject/SachRecord;;
 		// 98
-		virtualMethodRef LichSuMuonSach/getCurrentIndex()S;
+		staticFieldRef short CardService/indexLSS;
 		// 99
-		virtualMethodRef SachRecord/getTrangThai()S;
+		virtualMethodRef LichSuMuonSach/getCurrentIndex()S;
 		// 100
-		virtualMethodRef SachRecord/getThoiGian()[B;
+		virtualMethodRef SachRecord/getTrangThai()S;
 		// 101
-		virtualMethodRef SachRecord/getIdSach()S;
+		virtualMethodRef SachRecord/getThoiGian()[B;
 		// 102
-		staticFieldRef byte[] Constant/KEY_AES;
+		virtualMethodRef SachRecord/getIdSach()S;
 		// 103
+		staticFieldRef byte[] Constant/KEY_AES;
+		// 104
 		virtualMethodRef 2.1.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
 			.descriptor	Ljavacard/security/Key;	1.0;
 
-		// 104
-		virtualMethodRef 2.1.1([BSS[BS)S;		// doFinal([BSS[BS)S
 		// 105
-		staticFieldRef short CardService/offsetIndexReceiveData;
+		virtualMethodRef 2.1.1([BSS[BS)S;		// doFinal([BSS[BS)S
 		// 106
-		virtualMethodRef CardService/shortToByteArray(SS)[B;
+		staticFieldRef short CardService/offsetIndexReceiveData;
 		// 107
-		staticMethodRef CardService/aesEncrypt([B)[B;
+		virtualMethodRef CardService/shortToByteArray(SS)[B;
 		// 108
-		staticFieldRef short CardService/avatarLen;
+		staticMethodRef CardService/aesEncrypt([B)[B;
 		// 109
-		staticMethodRef CardService/getLengthForEncrypt(S)S;
+		staticMethodRef CardService/copy([B[B)V;
 		// 110
-		staticFieldRef byte[] Constant/RESPONSE_PIN_CHECK_TRUE;
+		staticFieldRef short CardService/avatarLen;
 		// 111
+		staticMethodRef CardService/getLengthForEncrypt(S)S;
+		// 112
+		staticFieldRef byte[] Constant/RESPONSE_PIN_CHECK_TRUE;
+		// 113
+		staticMethodRef 0.16.3([BSSB)S;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+		// 114
 		virtualMethodRef 1.15.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
 			.descriptor	Ljavacard/security/Key;	1.0;
 
-		// 112
-		virtualMethodRef 1.15.5([BSS[BS)S;		// sign([BSS[BS)S
-		// 113
-		staticMethodRef 3.0.0()V;		// java/lang/Object.<init>()V
-		// 114
-		classRef LichSuGuiXe;
 		// 115
-		staticMethodRef LichSuGuiXe/<init>()V;
+		virtualMethodRef 1.15.5([BSS[BS)S;		// sign([BSS[BS)S
 		// 116
-		staticFieldRef LichSuGuiXe CardService/historyVehicle;
+		staticMethodRef 3.0.0()V;		// java/lang/Object.<init>()V
 		// 117
-		classRef LichSuMuonSach;
+		staticFieldRef byte[] CardService/avatar;
 		// 118
-		staticMethodRef LichSuMuonSach/<init>()V;
+		classRef LichSuGuiXe;
 		// 119
-		staticFieldRef LichSuMuonSach CardService/historyBook;
+		staticMethodRef LichSuGuiXe/<init>()V;
 		// 120
-		staticMethodRef CardService/createRsaVariables()V;
+		staticFieldRef LichSuGuiXe CardService/historyVehicle;
 		// 121
+		classRef LichSuMuonSach;
+		// 122
+		staticMethodRef LichSuMuonSach/<init>()V;
+		// 123
+		staticFieldRef LichSuMuonSach CardService/historyBook;
+		// 124
+		staticMethodRef CardService/createRsaVariables()V;
+		// 125
 		staticMethodRef 1.11.0(BZ)Ljavacard/security/MessageDigest;;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
 			.descriptor	Ljavacard/security/MessageDigest;	1.11;
 
-		// 122
+		// 126
 		classRef 1.20;		// javacard/security/AESKey
-		// 123
+		// 127
 		staticMethodRef 0.3.0()V;		// javacard/framework/Applet.<init>()V
-		// 124
-		staticMethodRef 2.1.0(BZ)Ljavacardx/crypto/Cipher;;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
-			.descriptor	Ljavacardx/crypto/Cipher;	2.1;
-
 	}
 
 	.class public CardService 0 extends 0.3 {		// extends javacard/framework/Applet
@@ -308,8 +314,7 @@
 			private 1.11 sha 7;		// Ljavacard/security/MessageDigest;
 			private 1.20 aesKey 8;		// Ljavacard/security/AESKey;
 			private 2.1 cipher 9;		// Ljavacardx/crypto/Cipher;
-			private byte[] avatarDecryptTemp 10;		// [B
-			private short sigLen 11;		// S
+			private short sigLen 10;		// S
 			private static final byte[] idCard = {48,50,53,54,52};		// [B
 			private static byte[] pin;		// [B
 			private static byte id;		// B
@@ -337,7 +342,9 @@
 			private static short offsetIndexSendData;		// S
 			private static short avatarSize;		// S
 			private static short avatarLengthRemain;		// S
+			private static boolean doneGetData = 1;		// Z
 			private static byte[] temp;		// [B
+			private static byte[] avatarDecryptTemp;		// [B
 		}
 
 		.publicMethodTable 7 {
@@ -360,41 +367,41 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 123;		// javacard/framework/Applet.<init>()V
+					invokespecial 127;		// javacard/framework/Applet.<init>()V
 					aload_0;
 					bspush 15;
 					sspush 128;
 					sconst_0;
 					invokestatic 21;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
-					checkcast 0 122;		// T_CLASSORINTERFACE javacard/security/AESKey
+					checkcast 0 126;		// T_CLASSORINTERFACE javacard/security/AESKey
 					putfield_a 0;		// reference project/CardService.aesKey
 					aload_0;
 					bspush 13;
 					sconst_0;
-					invokestatic 124;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+					invokestatic 19;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
 					putfield_a 1;		// reference project/CardService.cipher
 					bspush 16;
 					newarray 11;
 					putstatic_a 23;		// reference project/CardService.pin
 					sconst_1;
 					putstatic_s 25;		// short project/CardService.pinCounter
-					sspush 32752;
+					sspush 16000;
 					newarray 11;
-					putstatic_a 56;		// reference project/CardService.avatar
-					new 114;		// project/LichSuGuiXe
+					putstatic_a 117;		// reference project/CardService.avatar
+					new 118;		// project/LichSuGuiXe
 					dup;
-					invokespecial 115;		// project/LichSuGuiXe.<init>()V
-					putstatic_a 116;		// reference project/CardService.historyVehicle
-					new 117;		// project/LichSuMuonSach
+					invokespecial 119;		// project/LichSuGuiXe.<init>()V
+					putstatic_a 120;		// reference project/CardService.historyVehicle
+					new 121;		// project/LichSuMuonSach
 					dup;
-					invokespecial 118;		// project/LichSuMuonSach.<init>()V
-					putstatic_a 119;		// reference project/CardService.historyBook
+					invokespecial 122;		// project/LichSuMuonSach.<init>()V
+					putstatic_a 123;		// reference project/CardService.historyBook
 					aload_0;
-					invokespecial 120;		// project/CardService.createRsaVariables()V
+					invokespecial 124;		// project/CardService.createRsaVariables()V
 					aload_0;
 					sconst_1;
 					sconst_0;
-					invokestatic 121;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
+					invokestatic 125;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
 					putfield_a 2;		// reference project/CardService.sha
 					return;
 		}
@@ -499,12 +506,12 @@
 				L6:	aload_2;
 					sconst_1;
 					baload;
-					stableswitch L108 0 20 L8 L16 L11 L17 L32 L35 L58 L59 L69 L7 L108 L108 L108 L108 L108 L108 L76 L85 L72 L90 L99;
+					stableswitch L109 0 20 L8 L16 L11 L17 L32 L35 L59 L60 L70 L7 L109 L109 L109 L109 L109 L109 L77 L86 L73 L91 L100;
 				L7:	aload_0;
 					aload_1;
 					getstatic_a 38;		// reference project/CardService.idCard
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
+					goto_w L110;
 				L8:	getstatic_b 40;		// boolean project/CardService.pinCreated
 					ifne L10;
 				L9:	invokestatic 41;		// javacard/framework/JCSystem.beginTransaction()V
@@ -530,7 +537,7 @@
 					putstatic_b 40;		// boolean project/CardService.pinCreated
 					sconst_1;
 					putstatic_b 48;		// boolean project/CardService.infoInit
-					goto_w L109;
+					goto_w L110;
 				L10:	aload_1;
 					invokevirtual 44;		// setOutgoing()S
 					pop;
@@ -542,7 +549,7 @@
 					sconst_0;
 					sconst_1;
 					invokevirtual 47;		// sendBytesLong([BSS)V
-					goto_w L109;
+					goto_w L110;
 				L11:	getstatic_s 25;		// short project/CardService.pinCounter
 					sconst_5;
 					if_scmpgt L15;
@@ -552,7 +559,7 @@
 					aload_2;
 					aload_1;
 					invokespecial 50;		// project/CardService.checkPin([BLjavacard/framework/APDU;)V
-				L14:	goto_w L109;
+				L14:	goto_w L110;
 				L15:	aload_1;
 					invokevirtual 44;		// setOutgoing()S
 					pop;
@@ -564,7 +571,7 @@
 					sconst_0;
 					sconst_1;
 					invokevirtual 47;		// sendBytesLong([BSS)V
-					goto_w L109;
+					goto_w L110;
 				L16:	invokestatic 41;		// javacard/framework/JCSystem.beginTransaction()V
 					aload_0;
 					aload_2;
@@ -582,7 +589,7 @@
 					sconst_0;
 					sconst_1;
 					invokevirtual 47;		// sendBytesLong([BSS)V
-					goto_w L109;
+					goto_w L110;
 				L17:	sconst_1;
 					sstore 4;
 				L18:	sconst_0;
@@ -640,7 +647,7 @@
 					sconst_0;
 					sconst_4;
 					invokevirtual 47;		// sendBytesLong([BSS)V
-				L30:	goto_w L109;
+				L30:	goto_w L110;
 				L31:	aload_1;
 					sconst_1;
 					invokevirtual 45;		// setOutgoingLength(S)V
@@ -649,7 +656,7 @@
 					sconst_0;
 					sconst_1;
 					invokevirtual 47;		// sendBytesLong([BSS)V
-					goto_w L109;
+					goto_w L110;
 				L32:	getstatic_b 48;		// boolean project/CardService.infoInit
 					ifeq L34;
 				L33:	aload_0;
@@ -661,163 +668,167 @@
 					aload_1;
 					aload_2;
 					invokespecial 55;		// project/CardService.flushInfo(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
+					goto_w L110;
 				L35:	aload_2;
 					sconst_2;
 					baload;
 					sstore 4;
-				L36:	getfield_a_this 8;		// reference project/CardService.avatarDecryptTemp
-					ifnonnull L38;
-				L37:	aload_0;
-					aload_0;
-					getstatic_a 56;		// reference project/CardService.avatar
-					invokespecial 57;		// project/CardService.aesDecrypt([B)[B
-					putfield_a 8;		// reference project/CardService.avatarDecryptTemp
-				L38:	sload 4;
-					stableswitch L57 0 7 L46 L48 L49 L51 L53 L55 L41 L39;
-				L39:	sconst_1;
+				L36:	getstatic_a 56;		// reference project/CardService.avatarDecryptTemp
+					ifnonnull L39;
+				L37:	getstatic_b 57;		// boolean project/CardService.doneGetData
+					ifeq L39;
+				L38:	aload_0;
+					getstatic_a 117;		// reference project/CardService.avatar
+					invokespecial 58;		// project/CardService.aesDecrypt([B)[B
+					putstatic_a 56;		// reference project/CardService.avatarDecryptTemp
+				L39:	sload 4;
+					stableswitch L58 0 7 L47 L49 L50 L52 L54 L56 L42 L40;
+				L40:	sconst_0;
+					putstatic_b 57;		// boolean project/CardService.doneGetData
+					sconst_1;
 					newarray 11;
 					dup;
 					sconst_0;
-					getstatic_b 58;		// byte project/CardService.id
+					getstatic_b 59;		// byte project/CardService.id
 					bastore;
 					astore 5;
-				L40:	aload_0;
+				L41:	aload_0;
 					aload_1;
 					aload 5;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L57;
-				L41:	getstatic_s 59;		// short project/CardService.avatarLengthRemain
+					goto_w L58;
+				L42:	getstatic_s 60;		// short project/CardService.avatarLengthRemain
 					sspush 255;
-					if_scmple L44;
-				L42:	getstatic_a 60;		// reference project/CardService.temp
-					ifnonnull L45;
-				L43:	sspush 255;
+					if_scmple L45;
+				L43:	getstatic_a 61;		// reference project/CardService.temp
+					ifnonnull L46;
+				L44:	sspush 255;
 					newarray 11;
-					putstatic_a 60;		// reference project/CardService.temp
-					goto L45;
-				L44:	getstatic_s 59;		// short project/CardService.avatarLengthRemain
+					putstatic_a 61;		// reference project/CardService.temp
+					goto L46;
+				L45:	getstatic_s 60;		// short project/CardService.avatarLengthRemain
 					newarray 11;
-					putstatic_a 60;		// reference project/CardService.temp
-				L45:	getfield_a_this 8;		// reference project/CardService.avatarDecryptTemp
-					getstatic_s 61;		// short project/CardService.offsetIndexSendData
-					getstatic_a 60;		// reference project/CardService.temp
+					putstatic_a 61;		// reference project/CardService.temp
+				L46:	getstatic_a 56;		// reference project/CardService.avatarDecryptTemp
+					getstatic_s 62;		// short project/CardService.offsetIndexSendData
+					getstatic_a 61;		// reference project/CardService.temp
 					sconst_0;
-					getstatic_a 60;		// reference project/CardService.temp
+					getstatic_a 61;		// reference project/CardService.temp
 					arraylength;
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
-					getstatic_s 61;		// short project/CardService.offsetIndexSendData
-					getstatic_a 60;		// reference project/CardService.temp
+					getstatic_s 62;		// short project/CardService.offsetIndexSendData
+					getstatic_a 61;		// reference project/CardService.temp
 					arraylength;
 					sadd;
-					putstatic_s 61;		// short project/CardService.offsetIndexSendData
-					getstatic_s 59;		// short project/CardService.avatarLengthRemain
-					getstatic_a 60;		// reference project/CardService.temp
+					putstatic_s 62;		// short project/CardService.offsetIndexSendData
+					getstatic_s 60;		// short project/CardService.avatarLengthRemain
+					getstatic_a 61;		// reference project/CardService.temp
 					arraylength;
 					ssub;
-					putstatic_s 59;		// short project/CardService.avatarLengthRemain
+					putstatic_s 60;		// short project/CardService.avatarLengthRemain
 					aload_0;
 					aload_1;
-					getstatic_a 60;		// reference project/CardService.temp
+					getstatic_a 61;		// reference project/CardService.temp
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L57;
-				L46:	aload_0;
+					goto_w L58;
+				L47:	aconst_null;
+					putstatic_a 56;		// reference project/CardService.avatarDecryptTemp
 					aconst_null;
-					putfield_a 8;		// reference project/CardService.avatarDecryptTemp
-					aconst_null;
-					putstatic_a 60;		// reference project/CardService.temp
-					getstatic_s 63;		// short project/CardService.avatarSize
-					putstatic_s 59;		// short project/CardService.avatarLengthRemain
+					putstatic_a 61;		// reference project/CardService.temp
+					getstatic_s 64;		// short project/CardService.avatarSize
+					putstatic_s 60;		// short project/CardService.avatarLengthRemain
 					sconst_0;
-					putstatic_s 61;		// short project/CardService.offsetIndexSendData
+					putstatic_s 62;		// short project/CardService.offsetIndexSendData
 					aload_0;
-					getstatic_a 64;		// reference project/CardService.name
-					invokespecial 57;		// project/CardService.aesDecrypt([B)[B
+					getstatic_a 65;		// reference project/CardService.name
+					invokespecial 58;		// project/CardService.aesDecrypt([B)[B
 					astore 5;
-				L47:	aload_0;
+				L48:	aload_0;
 					aload_1;
 					aload 5;
-					getstatic_s 65;		// short project/CardService.nameLen
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					getstatic_s 66;		// short project/CardService.nameLen
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
 					aconst_null;
 					astore 5;
-					goto L57;
-				L48:	aload_0;
+					goto L58;
+				L49:	aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
 					dup;
 					sconst_0;
-					getstatic_b 67;		// byte project/CardService.gender
+					getstatic_b 68;		// byte project/CardService.gender
 					bastore;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto L57;
-				L49:	aload_0;
-					getstatic_a 68;		// reference project/CardService.date
-					invokespecial 57;		// project/CardService.aesDecrypt([B)[B
-					astore 5;
+					goto L58;
 				L50:	aload_0;
-					aload_1;
-					aload 5;
-					getstatic_s 69;		// short project/CardService.dateLen
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
-					aconst_null;
+					getstatic_a 69;		// reference project/CardService.date
+					invokespecial 58;		// project/CardService.aesDecrypt([B)[B
 					astore 5;
-					goto L57;
 				L51:	aload_0;
-					getstatic_a 70;		// reference project/CardService.phone
-					invokespecial 57;		// project/CardService.aesDecrypt([B)[B
+					aload_1;
+					aload 5;
+					getstatic_s 70;		// short project/CardService.dateLen
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					aconst_null;
 					astore 5;
+					goto L58;
 				L52:	aload_0;
-					aload_1;
-					aload 5;
-					getstatic_s 71;		// short project/CardService.phoneLen
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
-					aconst_null;
+					getstatic_a 71;		// reference project/CardService.phone
+					invokespecial 58;		// project/CardService.aesDecrypt([B)[B
 					astore 5;
-					goto L57;
 				L53:	aload_0;
-					getstatic_a 72;		// reference project/CardService.studentId
-					invokespecial 57;		// project/CardService.aesDecrypt([B)[B
+					aload_1;
+					aload 5;
+					getstatic_s 72;		// short project/CardService.phoneLen
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					aconst_null;
 					astore 5;
+					goto L58;
 				L54:	aload_0;
-					aload_1;
-					aload 5;
-					getstatic_s 73;		// short project/CardService.studentIdLen
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
-					aconst_null;
+					getstatic_a 73;		// reference project/CardService.studentId
+					invokespecial 58;		// project/CardService.aesDecrypt([B)[B
 					astore 5;
-					goto L57;
 				L55:	aload_0;
-					getstatic_a 74;		// reference project/CardService.classSV
-					invokespecial 57;		// project/CardService.aesDecrypt([B)[B
-					astore 5;
-				L56:	aload_0;
 					aload_1;
 					aload 5;
-					getstatic_s 75;		// short project/CardService.classSVLen
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					getstatic_s 74;		// short project/CardService.studentIdLen
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
 					aconst_null;
 					astore 5;
-					goto L57;
-				L57:	goto_w L109;
-				L58:	aload_0;
+					goto L58;
+				L56:	aload_0;
+					getstatic_a 75;		// reference project/CardService.classSV
+					invokespecial 58;		// project/CardService.aesDecrypt([B)[B
+					astore 5;
+				L57:	aload_0;
+					aload_1;
+					aload 5;
+					getstatic_s 76;		// short project/CardService.classSVLen
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					aconst_null;
+					astore 5;
+					sconst_1;
+					putstatic_b 57;		// boolean project/CardService.doneGetData
+					goto L58;
+				L58:	goto_w L110;
+				L59:	aload_0;
 					aload_1;
 					aload_2;
 					invokespecial 55;		// project/CardService.flushInfo(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L59:	sconst_4;
+					goto_w L110;
+				L60:	sconst_4;
 					newarray 11;
 					astore 4;
-				L60:	sconst_1;
+				L61:	sconst_1;
 					sstore 5;
-				L61:	sconst_0;
+				L62:	sconst_0;
 					sstore 6;
-				L62:	sload 6;
+				L63:	sload 6;
 					sconst_4;
-					if_scmpge L66;
-				L63:	getstatic_a 52;		// reference project/Constant.SECRET_UNLOCK_KEY
+					if_scmpge L67;
+				L64:	getstatic_a 52;		// reference project/Constant.SECRET_UNLOCK_KEY
 					sload 6;
 					baload;
 					aload_2;
@@ -825,138 +836,138 @@
 					sload 6;
 					sadd;
 					baload;
-					if_scmpeq L65;
-				L64:	sconst_0;
+					if_scmpeq L66;
+				L65:	sconst_0;
 					sstore 5;
-					goto L66;
-				L65:	sinc 6 1;
-					goto L62;
-				L66:	sload 5;
-					ifeq L68;
-				L67:	aload_0;
-					invokespecial 76;		// project/CardService.resetInfo()V
+					goto L67;
+				L66:	sinc 6 1;
+					goto L63;
+				L67:	sload 5;
+					ifeq L69;
+				L68:	aload_0;
+					invokespecial 77;		// project/CardService.resetInfo()V
 					aload_0;
 					aload_1;
-					getstatic_a 77;		// reference project/Constant.RESPONSE_RESET_INFO_SUCCESS
+					getstatic_a 78;		// reference project/Constant.RESPONSE_RESET_INFO_SUCCESS
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L68:	aload_0;
+					goto_w L110;
+				L69:	aload_0;
 					aload_1;
 					getstatic_a 54;		// reference project/Constant.RESPONSE_PIN_CHECK_FALSE
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L69:	aload_2;
+					goto_w L110;
+				L70:	aload_2;
 					sconst_2;
 					baload;
 					sstore 4;
-				L70:	bspush 7;
+				L71:	bspush 7;
 					newarray 11;
 					astore 5;
-				L71:	aload_2;
+				L72:	aload_2;
 					sconst_5;
 					aload 5;
 					sconst_0;
 					bspush 7;
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
-					getstatic_a 116;		// reference project/CardService.historyVehicle
-					new 78;		// project/GuiXeRecord
+					getstatic_a 120;		// reference project/CardService.historyVehicle
+					new 79;		// project/GuiXeRecord
 					dup;
 					aload 5;
 					sload 4;
-					invokespecial 79;		// project/GuiXeRecord.<init>([BS)V
-					invokevirtual 80;		// addLichSuMoi(Lproject/GuiXeRecord;)V
+					invokespecial 80;		// project/GuiXeRecord.<init>([BS)V
+					invokevirtual 81;		// addLichSuMoi(Lproject/GuiXeRecord;)V
 					aload_0;
 					aload_1;
-					getstatic_a 81;		// reference project/Constant.RESPONSE_GUI_XE_OK
+					getstatic_a 82;		// reference project/Constant.RESPONSE_GUI_XE_OK
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L72:	aload_2;
+					goto_w L110;
+				L73:	aload_2;
 					sconst_2;
 					baload;
 					sstore 4;
-				L73:	aload_2;
+				L74:	aload_2;
 					sconst_3;
 					baload;
 					sstore 5;
-				L74:	bspush 7;
+				L75:	bspush 7;
 					newarray 11;
 					astore 6;
-				L75:	aload_2;
+				L76:	aload_2;
 					sconst_5;
 					aload 6;
 					sconst_0;
 					bspush 7;
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
-					getstatic_a 119;		// reference project/CardService.historyBook
-					new 82;		// project/SachRecord
+					getstatic_a 123;		// reference project/CardService.historyBook
+					new 83;		// project/SachRecord
 					dup;
 					aload 6;
 					sload 4;
 					sload 5;
-					invokespecial 83;		// project/SachRecord.<init>([BSS)V
-					invokevirtual 84;		// addLichSuMoi(Lproject/SachRecord;)V
+					invokespecial 84;		// project/SachRecord.<init>([BSS)V
+					invokevirtual 85;		// addLichSuMoi(Lproject/SachRecord;)V
 					aload_0;
 					aload_1;
-					getstatic_a 81;		// reference project/Constant.RESPONSE_GUI_XE_OK
+					getstatic_a 82;		// reference project/Constant.RESPONSE_GUI_XE_OK
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L76:	aload_2;
+					goto_w L110;
+				L77:	aload_2;
 					sconst_2;
 					baload;
 					sstore 4;
-				L77:	sload 4;
-					slookupswitch L84 2 8 L78 9 L81;
-				L78:	getfield_s_this 3;		// short project/CardService.sigLen
+				L78:	sload 4;
+					slookupswitch L85 2 8 L79 9 L82;
+				L79:	getfield_s_this 3;		// short project/CardService.sigLen
 					sconst_2;
 					smul;
 					newarray 11;
 					astore 5;
-				L79:	getfield_a_this 7;		// reference project/CardService.rsaPubKey
+				L80:	getfield_a_this 7;		// reference project/CardService.rsaPubKey
 					aload 5;
 					sconst_0;
 					invokeinterface 3 24 5;		// javacard/security/RSAPublicKey
 					sstore 6;
-				L80:	aload_0;
+				L81:	aload_0;
 					aload_1;
 					aload 5;
 					sload 6;
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
-					goto L84;
-				L81:	getfield_s_this 3;		// short project/CardService.sigLen
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					goto L85;
+				L82:	getfield_s_this 3;		// short project/CardService.sigLen
 					sconst_2;
 					smul;
 					newarray 11;
 					astore 5;
-				L82:	getfield_a_this 7;		// reference project/CardService.rsaPubKey
+				L83:	getfield_a_this 7;		// reference project/CardService.rsaPubKey
 					aload 5;
 					sconst_0;
 					invokeinterface 3 24 4;		// javacard/security/RSAPublicKey
 					sstore 6;
-				L83:	aload_0;
+				L84:	aload_0;
 					aload_1;
 					aload 5;
 					sload 6;
-					invokespecial 66;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
-					goto L84;
-				L84:	goto_w L109;
-				L85:	aload_1;
-					invokevirtual 85;		// getIncomingLength()S
+					invokespecial 67;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[BS)V
+					goto L85;
+				L85:	goto_w L110;
+				L86:	aload_1;
+					invokevirtual 86;		// getIncomingLength()S
 					sstore 4;
-				L86:	sload 4;
+				L87:	sload 4;
 					newarray 11;
 					astore 5;
-				L87:	sspush 255;
+				L88:	sspush 255;
 					newarray 11;
 					astore 6;
-				L88:	aload_2;
+				L89:	aload_2;
 					aload_1;
-					invokevirtual 86;		// getOffsetCdata()S
+					invokevirtual 87;		// getOffsetCdata()S
 					aload 5;
 					sconst_0;
 					sload 4;
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
 					getfield_a_this 2;		// reference project/CardService.sha
 					aload 5;
@@ -964,21 +975,21 @@
 					sload 4;
 					aload 6;
 					sconst_0;
-					invokevirtual 87;		// doFinal([BSS[BS)S
+					invokevirtual 88;		// doFinal([BSS[BS)S
 					sstore 7;
-				L89:	aload_0;
+				L90:	aload_0;
 					aload_1;
 					aload 6;
 					sload 7;
-					invokespecial 88;		// project/CardService.rsaSign(Ljavacard/framework/APDU;[BS)V
-					goto_w L109;
-				L90:	bspush 9;
+					invokespecial 89;		// project/CardService.rsaSign(Ljavacard/framework/APDU;[BS)V
+					goto_w L110;
+				L91:	bspush 9;
 					newarray 11;
 					astore 4;
-				L91:	getstatic_a 116;		// reference project/CardService.historyVehicle
-					invokevirtual 89;		// isEmpty()Z
-					ifeq L93;
-				L92:	aload_0;
+				L92:	getstatic_a 120;		// reference project/CardService.historyVehicle
+					invokevirtual 90;		// isEmpty()Z
+					ifeq L94;
+				L93:	aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
@@ -987,15 +998,17 @@
 					sconst_0;
 					bastore;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L93:	getstatic_a 116;		// reference project/CardService.historyVehicle
-					invokevirtual 90;		// getLichSu()[Lproject/GuiXeRecord;
-					getstatic_s 91;		// short project/CardService.indexLSX
+					goto_w L110;
+				L94:	getstatic_a 120;		// reference project/CardService.historyVehicle
+					invokevirtual 91;		// getLichSu()[Lproject/GuiXeRecord;
+					getstatic_s 92;		// short project/CardService.indexLSX
 					aaload;
 					astore 5;
-				L94:	aload 5;
-					ifnonnull L96;
-				L95:	aload_0;
+				L95:	aload 5;
+					ifnonnull L97;
+				L96:	sconst_0;
+					putstatic_s 92;		// short project/CardService.indexLSX
+					aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
@@ -1004,13 +1017,13 @@
 					sconst_0;
 					bastore;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L96:	getstatic_a 116;		// reference project/CardService.historyVehicle
-					invokevirtual 92;		// getCurrentIndex()S
-					getstatic_s 91;		// short project/CardService.indexLSX
-					if_scmpgt L98;
-				L97:	sconst_0;
-					putstatic_s 91;		// short project/CardService.indexLSX
+					goto_w L110;
+				L97:	getstatic_a 120;		// reference project/CardService.historyVehicle
+					invokevirtual 93;		// getCurrentIndex()S
+					getstatic_s 92;		// short project/CardService.indexLSX
+					if_scmpgt L99;
+				L98:	sconst_0;
+					putstatic_s 92;		// short project/CardService.indexLSX
 					aload 4;
 					sconst_0;
 					sconst_0;
@@ -1018,55 +1031,55 @@
 					aload 4;
 					sconst_1;
 					aload 5;
-					invokevirtual 93;		// getTrangThai()S
+					invokevirtual 94;		// getTrangThai()S
 					s2b;
 					bastore;
 					aload 4;
 					sconst_2;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_0;
 					baload;
 					bastore;
 					aload 4;
 					sconst_3;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_1;
 					baload;
 					bastore;
 					aload 4;
 					sconst_4;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_2;
 					baload;
 					bastore;
 					aload 4;
 					sconst_5;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_3;
 					baload;
 					bastore;
 					aload 4;
 					bspush 6;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_4;
 					baload;
 					bastore;
 					aload 4;
 					bspush 7;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_5;
 					baload;
 					bastore;
 					aload 4;
 					bspush 8;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					bspush 6;
 					baload;
 					bastore;
@@ -1074,11 +1087,11 @@
 					aload_1;
 					aload 4;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L98:	getstatic_s 91;		// short project/CardService.indexLSX
+					goto_w L110;
+				L99:	getstatic_s 92;		// short project/CardService.indexLSX
 					sconst_1;
 					sadd;
-					putstatic_s 91;		// short project/CardService.indexLSX
+					putstatic_s 92;		// short project/CardService.indexLSX
 					aload 4;
 					sconst_0;
 					bspush 50;
@@ -1086,55 +1099,55 @@
 					aload 4;
 					sconst_1;
 					aload 5;
-					invokevirtual 93;		// getTrangThai()S
+					invokevirtual 94;		// getTrangThai()S
 					s2b;
 					bastore;
 					aload 4;
 					sconst_2;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_0;
 					baload;
 					bastore;
 					aload 4;
 					sconst_3;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_1;
 					baload;
 					bastore;
 					aload 4;
 					sconst_4;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_2;
 					baload;
 					bastore;
 					aload 4;
 					sconst_5;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_3;
 					baload;
 					bastore;
 					aload 4;
 					bspush 6;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_4;
 					baload;
 					bastore;
 					aload 4;
 					bspush 7;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					sconst_5;
 					baload;
 					bastore;
 					aload 4;
 					bspush 8;
 					aload 5;
-					invokevirtual 94;		// getThoiGian()[B
+					invokevirtual 95;		// getThoiGian()[B
 					bspush 6;
 					baload;
 					bastore;
@@ -1142,14 +1155,14 @@
 					aload_1;
 					aload 4;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L99:	bspush 10;
+					goto_w L110;
+				L100:	bspush 10;
 					newarray 11;
 					astore 4;
-				L100:	getstatic_a 119;		// reference project/CardService.historyBook
-					invokevirtual 95;		// isEmpty()Z
-					ifeq L102;
-				L101:	aload_0;
+				L101:	getstatic_a 123;		// reference project/CardService.historyBook
+					invokevirtual 96;		// isEmpty()Z
+					ifeq L103;
+				L102:	aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
@@ -1158,16 +1171,16 @@
 					sconst_0;
 					bastore;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L102:	getstatic_a 119;		// reference project/CardService.historyBook
-					invokevirtual 96;		// getLichSu()[Lproject/SachRecord;
-					getstatic_s 97;		// short project/CardService.indexLSS
+					goto_w L110;
+				L103:	getstatic_a 123;		// reference project/CardService.historyBook
+					invokevirtual 97;		// getLichSu()[Lproject/SachRecord;
+					getstatic_s 98;		// short project/CardService.indexLSS
 					aaload;
 					astore 5;
-				L103:	aload 5;
-					ifnonnull L105;
-				L104:	sconst_0;
-					putstatic_s 97;		// short project/CardService.indexLSS
+				L104:	aload 5;
+					ifnonnull L106;
+				L105:	sconst_0;
+					putstatic_s 98;		// short project/CardService.indexLSS
 					aload_0;
 					aload_1;
 					sconst_1;
@@ -1177,13 +1190,13 @@
 					sconst_0;
 					bastore;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L105:	getstatic_a 119;		// reference project/CardService.historyBook
-					invokevirtual 98;		// getCurrentIndex()S
-					getstatic_s 97;		// short project/CardService.indexLSS
-					if_scmpgt L107;
-				L106:	sconst_0;
-					putstatic_s 97;		// short project/CardService.indexLSS
+					goto_w L110;
+				L106:	getstatic_a 123;		// reference project/CardService.historyBook
+					invokevirtual 99;		// getCurrentIndex()S
+					getstatic_s 98;		// short project/CardService.indexLSS
+					if_scmpgt L108;
+				L107:	sconst_0;
+					putstatic_s 98;		// short project/CardService.indexLSS
 					aload 4;
 					sconst_0;
 					sconst_0;
@@ -1191,73 +1204,73 @@
 					aload 4;
 					sconst_1;
 					aload 5;
-					invokevirtual 99;		// getTrangThai()S
+					invokevirtual 100;		// getTrangThai()S
 					s2b;
 					bastore;
 					aload 4;
 					sconst_2;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_0;
 					baload;
 					bastore;
 					aload 4;
 					sconst_3;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_1;
 					baload;
 					bastore;
 					aload 4;
 					sconst_4;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_2;
 					baload;
 					bastore;
 					aload 4;
 					sconst_5;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_3;
 					baload;
 					bastore;
 					aload 4;
 					bspush 6;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_4;
 					baload;
 					bastore;
 					aload 4;
 					bspush 7;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_5;
 					baload;
 					bastore;
 					aload 4;
 					bspush 8;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					bspush 6;
 					baload;
 					bastore;
 					aload 4;
 					bspush 9;
 					aload 5;
-					invokevirtual 101;		// getIdSach()S
+					invokevirtual 102;		// getIdSach()S
 					s2b;
 					bastore;
 					aload_0;
 					aload_1;
 					aload 4;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L109;
-				L107:	getstatic_s 97;		// short project/CardService.indexLSS
+					goto_w L110;
+				L108:	getstatic_s 98;		// short project/CardService.indexLSS
 					sconst_1;
 					sadd;
-					putstatic_s 97;		// short project/CardService.indexLSS
+					putstatic_s 98;		// short project/CardService.indexLSS
 					aload 4;
 					sconst_0;
 					bspush 50;
@@ -1265,72 +1278,72 @@
 					aload 4;
 					sconst_1;
 					aload 5;
-					invokevirtual 99;		// getTrangThai()S
+					invokevirtual 100;		// getTrangThai()S
 					s2b;
 					bastore;
 					aload 4;
 					sconst_2;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_0;
 					baload;
 					bastore;
 					aload 4;
 					sconst_3;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_1;
 					baload;
 					bastore;
 					aload 4;
 					sconst_4;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_2;
 					baload;
 					bastore;
 					aload 4;
 					sconst_5;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_3;
 					baload;
 					bastore;
 					aload 4;
 					bspush 6;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_4;
 					baload;
 					bastore;
 					aload 4;
 					bspush 7;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					sconst_5;
 					baload;
 					bastore;
 					aload 4;
 					bspush 8;
 					aload 5;
-					invokevirtual 100;		// getThoiGian()[B
+					invokevirtual 101;		// getThoiGian()[B
 					bspush 6;
 					baload;
 					bastore;
 					aload 4;
 					bspush 9;
 					aload 5;
-					invokevirtual 101;		// getIdSach()S
+					invokevirtual 102;		// getIdSach()S
 					s2b;
 					bastore;
 					aload_0;
 					aload_1;
 					aload 4;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto L109;
-				L108:	sspush 27904;
+					goto L110;
+				L109:	sspush 27904;
 					invokestatic 37;		// javacard/framework/ISOException.throwIt(S)V
-				L109:	return;
+				L110:	return;
 		}
 
 		.method private encryptAES([B)[B {
@@ -1359,13 +1372,13 @@
 					sinc 4 1;
 					goto L3;
 				L5:	getfield_a_this 0;		// reference project/CardService.aesKey
-					getstatic_a 102;		// reference project/Constant.KEY_AES
+					getstatic_a 103;		// reference project/Constant.KEY_AES
 					sconst_0;
-					invokeinterface 3 122 4;		// javacard/security/AESKey
+					invokeinterface 3 126 4;		// javacard/security/AESKey
 					getfield_a_this 1;		// reference project/CardService.cipher
 					getfield_a_this 0;		// reference project/CardService.aesKey
 					sconst_2;
-					invokevirtual 103;		// init(Ljavacard/security/Key;B)V
+					invokevirtual 104;		// init(Ljavacard/security/Key;B)V
 					getfield_a_this 1;		// reference project/CardService.cipher
 					aload_2;
 					sconst_0;
@@ -1373,7 +1386,7 @@
 					arraylength;
 					aload_3;
 					sconst_0;
-					invokevirtual 104;		// doFinal([BSS[BS)S
+					invokevirtual 105;		// doFinal([BSS[BS)S
 					pop;
 					aload_3;
 					areturn;
@@ -1387,13 +1400,13 @@
 					newarray 11;
 					astore_2;
 				L1:	getfield_a_this 0;		// reference project/CardService.aesKey
-					getstatic_a 102;		// reference project/Constant.KEY_AES
+					getstatic_a 103;		// reference project/Constant.KEY_AES
 					sconst_0;
-					invokeinterface 3 122 4;		// javacard/security/AESKey
+					invokeinterface 3 126 4;		// javacard/security/AESKey
 					getfield_a_this 1;		// reference project/CardService.cipher
 					getfield_a_this 0;		// reference project/CardService.aesKey
 					sconst_1;
-					invokevirtual 103;		// init(Ljavacard/security/Key;B)V
+					invokevirtual 104;		// init(Ljavacard/security/Key;B)V
 					getfield_a_this 1;		// reference project/CardService.cipher
 					aload_1;
 					sconst_0;
@@ -1401,7 +1414,7 @@
 					arraylength;
 					aload_2;
 					sconst_0;
-					invokevirtual 104;		// doFinal([BSS[BS)S
+					invokevirtual 105;		// doFinal([BSS[BS)S
 					pop;
 					aload_2;
 					areturn;
@@ -1485,11 +1498,11 @@
 					baload;
 					sstore_3;
 				L1:	sload_3;
-					stableswitch L13 0 7 L7 L8 L9 L10 L11 L12 L3 L2;
+					stableswitch L14 0 7 L7 L9 L10 L11 L12 L13 L3 L2;
 				L2:	aload_2;
 					sconst_3;
 					baload;
-					putstatic_b 58;		// byte project/CardService.id
+					putstatic_b 59;		// byte project/CardService.id
 					aload_1;
 					invokevirtual 44;		// setOutgoing()S
 					pop;
@@ -1509,183 +1522,189 @@
 					sconst_0;
 					sconst_1;
 					invokevirtual 47;		// sendBytesLong([BSS)V
-					goto_w L13;
+					goto_w L14;
 				L3:	aload_1;
-					invokevirtual 85;		// getIncomingLength()S
+					invokevirtual 86;		// getIncomingLength()S
 					sstore 4;
 				L4:	aload_1;
-					invokevirtual 86;		// getOffsetCdata()S
+					invokevirtual 87;		// getOffsetCdata()S
 					sstore 5;
 				L5:	aload_2;
 					sload 5;
-					getstatic_a 56;		// reference project/CardService.avatar
-					getstatic_s 105;		// short project/CardService.offsetIndexReceiveData
+					getstatic_a 117;		// reference project/CardService.avatar
+					getstatic_s 106;		// short project/CardService.offsetIndexReceiveData
 					sload 4;
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
-					getstatic_s 105;		// short project/CardService.offsetIndexReceiveData
+					getstatic_s 106;		// short project/CardService.offsetIndexReceiveData
 					sload 4;
 					sadd;
-					putstatic_s 105;		// short project/CardService.offsetIndexReceiveData
+					putstatic_s 106;		// short project/CardService.offsetIndexReceiveData
 					aload_0;
-					getstatic_a 56;		// reference project/CardService.avatar
+					getstatic_a 117;		// reference project/CardService.avatar
 					arraylength;
 					sconst_0;
-					invokevirtual 106;		// shortToByteArray(SS)[B
+					invokevirtual 107;		// shortToByteArray(SS)[B
 					astore 6;
 				L6:	aload_0;
 					aload_1;
 					aload 6;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L13;
-				L7:	getstatic_s 105;		// short project/CardService.offsetIndexReceiveData
-					putstatic_s 63;		// short project/CardService.avatarSize
-					getstatic_s 63;		// short project/CardService.avatarSize
-					putstatic_s 59;		// short project/CardService.avatarLengthRemain
+					goto_w L14;
+				L7:	getstatic_s 106;		// short project/CardService.offsetIndexReceiveData
+					putstatic_s 64;		// short project/CardService.avatarSize
+					getstatic_s 64;		// short project/CardService.avatarSize
+					putstatic_s 60;		// short project/CardService.avatarLengthRemain
 					sconst_0;
-					putstatic_s 105;		// short project/CardService.offsetIndexReceiveData
+					putstatic_s 106;		// short project/CardService.offsetIndexReceiveData
 					aload_0;
-					getstatic_a 56;		// reference project/CardService.avatar
-					invokespecial 107;		// project/CardService.aesEncrypt([B)[B
-					putstatic_a 56;		// reference project/CardService.avatar
-					getstatic_s 63;		// short project/CardService.avatarSize
-					putstatic_s 108;		// short project/CardService.avatarLen
+					getstatic_a 117;		// reference project/CardService.avatar
+					invokespecial 108;		// project/CardService.aesEncrypt([B)[B
+					astore 4;
+				L8:	aload_0;
+					aload 4;
+					getstatic_a 117;		// reference project/CardService.avatar
+					invokespecial 109;		// project/CardService.copy([B[B)V
+					aconst_null;
+					astore 4;
+					getstatic_s 64;		// short project/CardService.avatarSize
+					putstatic_s 110;		// short project/CardService.avatarLen
 					aload_1;
-					invokevirtual 85;		// getIncomingLength()S
-					putstatic_s 65;		// short project/CardService.nameLen
+					invokevirtual 86;		// getIncomingLength()S
+					putstatic_s 66;		// short project/CardService.nameLen
 					aload_0;
-					getstatic_s 65;		// short project/CardService.nameLen
-					invokespecial 109;		// project/CardService.getLengthForEncrypt(S)S
+					getstatic_s 66;		// short project/CardService.nameLen
+					invokespecial 111;		// project/CardService.getLengthForEncrypt(S)S
 					newarray 11;
-					putstatic_a 64;		// reference project/CardService.name
+					putstatic_a 65;		// reference project/CardService.name
 					aload_2;
 					aload_1;
-					invokevirtual 86;		// getOffsetCdata()S
-					getstatic_a 64;		// reference project/CardService.name
+					invokevirtual 87;		// getOffsetCdata()S
+					getstatic_a 65;		// reference project/CardService.name
 					sconst_0;
-					getstatic_s 65;		// short project/CardService.nameLen
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					getstatic_s 66;		// short project/CardService.nameLen
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
 					aload_0;
-					getstatic_a 64;		// reference project/CardService.name
-					invokespecial 107;		// project/CardService.aesEncrypt([B)[B
-					putstatic_a 64;		// reference project/CardService.name
+					getstatic_a 65;		// reference project/CardService.name
+					invokespecial 108;		// project/CardService.aesEncrypt([B)[B
+					putstatic_a 65;		// reference project/CardService.name
 					aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L13;
-				L8:	aload_2;
+					goto_w L14;
+				L9:	aload_2;
 					sconst_3;
 					baload;
-					putstatic_b 67;		// byte project/CardService.gender
+					putstatic_b 68;		// byte project/CardService.gender
 					aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L13;
-				L9:	aload_1;
-					invokevirtual 85;		// getIncomingLength()S
-					putstatic_s 69;		// short project/CardService.dateLen
-					aload_0;
-					getstatic_s 69;		// short project/CardService.dateLen
-					invokespecial 109;		// project/CardService.getLengthForEncrypt(S)S
-					newarray 11;
-					putstatic_a 68;		// reference project/CardService.date
-					aload_2;
-					sconst_5;
-					getstatic_a 68;		// reference project/CardService.date
-					sconst_0;
-					getstatic_s 69;		// short project/CardService.dateLen
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
-					pop;
-					aload_0;
-					getstatic_a 68;		// reference project/CardService.date
-					invokespecial 107;		// project/CardService.aesEncrypt([B)[B
-					putstatic_a 68;		// reference project/CardService.date
-					aload_0;
-					aload_1;
-					sconst_1;
-					newarray 11;
-					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto_w L13;
+					goto_w L14;
 				L10:	aload_1;
-					invokevirtual 85;		// getIncomingLength()S
-					putstatic_s 71;		// short project/CardService.phoneLen
+					invokevirtual 86;		// getIncomingLength()S
+					putstatic_s 70;		// short project/CardService.dateLen
 					aload_0;
-					getstatic_s 71;		// short project/CardService.phoneLen
-					invokespecial 109;		// project/CardService.getLengthForEncrypt(S)S
+					getstatic_s 70;		// short project/CardService.dateLen
+					invokespecial 111;		// project/CardService.getLengthForEncrypt(S)S
 					newarray 11;
-					putstatic_a 70;		// reference project/CardService.phone
+					putstatic_a 69;		// reference project/CardService.date
 					aload_2;
 					sconst_5;
-					getstatic_a 70;		// reference project/CardService.phone
+					getstatic_a 69;		// reference project/CardService.date
 					sconst_0;
-					getstatic_s 71;		// short project/CardService.phoneLen
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					getstatic_s 70;		// short project/CardService.dateLen
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
 					aload_0;
-					getstatic_a 70;		// reference project/CardService.phone
-					invokespecial 107;		// project/CardService.aesEncrypt([B)[B
-					putstatic_a 70;		// reference project/CardService.phone
+					getstatic_a 69;		// reference project/CardService.date
+					invokespecial 108;		// project/CardService.aesEncrypt([B)[B
+					putstatic_a 69;		// reference project/CardService.date
 					aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto L13;
+					goto_w L14;
 				L11:	aload_1;
-					invokevirtual 85;		// getIncomingLength()S
-					putstatic_s 73;		// short project/CardService.studentIdLen
+					invokevirtual 86;		// getIncomingLength()S
+					putstatic_s 72;		// short project/CardService.phoneLen
 					aload_0;
-					getstatic_s 73;		// short project/CardService.studentIdLen
-					invokespecial 109;		// project/CardService.getLengthForEncrypt(S)S
+					getstatic_s 72;		// short project/CardService.phoneLen
+					invokespecial 111;		// project/CardService.getLengthForEncrypt(S)S
 					newarray 11;
-					putstatic_a 72;		// reference project/CardService.studentId
+					putstatic_a 71;		// reference project/CardService.phone
 					aload_2;
 					sconst_5;
-					getstatic_a 72;		// reference project/CardService.studentId
+					getstatic_a 71;		// reference project/CardService.phone
 					sconst_0;
-					getstatic_s 73;		// short project/CardService.studentIdLen
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					getstatic_s 72;		// short project/CardService.phoneLen
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
 					aload_0;
-					getstatic_a 72;		// reference project/CardService.studentId
-					invokespecial 107;		// project/CardService.aesEncrypt([B)[B
-					putstatic_a 72;		// reference project/CardService.studentId
+					getstatic_a 71;		// reference project/CardService.phone
+					invokespecial 108;		// project/CardService.aesEncrypt([B)[B
+					putstatic_a 71;		// reference project/CardService.phone
 					aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-					goto L13;
+					goto L14;
 				L12:	aload_1;
-					invokevirtual 85;		// getIncomingLength()S
-					putstatic_s 75;		// short project/CardService.classSVLen
+					invokevirtual 86;		// getIncomingLength()S
+					putstatic_s 74;		// short project/CardService.studentIdLen
 					aload_0;
-					getstatic_s 75;		// short project/CardService.classSVLen
-					invokespecial 109;		// project/CardService.getLengthForEncrypt(S)S
+					getstatic_s 74;		// short project/CardService.studentIdLen
+					invokespecial 111;		// project/CardService.getLengthForEncrypt(S)S
 					newarray 11;
-					putstatic_a 74;		// reference project/CardService.classSV
+					putstatic_a 73;		// reference project/CardService.studentId
 					aload_2;
 					sconst_5;
-					getstatic_a 74;		// reference project/CardService.classSV
+					getstatic_a 73;		// reference project/CardService.studentId
 					sconst_0;
-					getstatic_s 75;		// short project/CardService.classSVLen
-					invokestatic 62;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					getstatic_s 74;		// short project/CardService.studentIdLen
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
 					pop;
 					aload_0;
-					getstatic_a 74;		// reference project/CardService.classSV
-					invokespecial 107;		// project/CardService.aesEncrypt([B)[B
-					putstatic_a 74;		// reference project/CardService.classSV
+					getstatic_a 73;		// reference project/CardService.studentId
+					invokespecial 108;		// project/CardService.aesEncrypt([B)[B
+					putstatic_a 73;		// reference project/CardService.studentId
 					aload_0;
 					aload_1;
 					sconst_1;
 					newarray 11;
 					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
-				L13:	return;
+					goto L14;
+				L13:	aload_1;
+					invokevirtual 86;		// getIncomingLength()S
+					putstatic_s 76;		// short project/CardService.classSVLen
+					aload_0;
+					getstatic_s 76;		// short project/CardService.classSVLen
+					invokespecial 111;		// project/CardService.getLengthForEncrypt(S)S
+					newarray 11;
+					putstatic_a 75;		// reference project/CardService.classSV
+					aload_2;
+					sconst_5;
+					getstatic_a 75;		// reference project/CardService.classSV
+					sconst_0;
+					getstatic_s 76;		// short project/CardService.classSVLen
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					getstatic_a 75;		// reference project/CardService.classSV
+					invokespecial 108;		// project/CardService.aesEncrypt([B)[B
+					putstatic_a 75;		// reference project/CardService.classSV
+					aload_0;
+					aload_1;
+					sconst_1;
+					newarray 11;
+					invokespecial 39;		// project/CardService.sendResponse(Ljavacard/framework/APDU;[B)V
+				L14:	return;
 		}
 
 		.method private checkPin([BLjavacard/framework/APDU;)V {
@@ -1726,7 +1745,7 @@
 					sload_3;
 					ifeq L9;
 				L8:	aload_2;
-					getstatic_a 110;		// reference project/Constant.RESPONSE_PIN_CHECK_TRUE
+					getstatic_a 112;		// reference project/Constant.RESPONSE_PIN_CHECK_TRUE
 					sconst_0;
 					sconst_1;
 					invokevirtual 47;		// sendBytesLong([BSS)V
@@ -1744,51 +1763,53 @@
 		}
 
 		.method private resetInfo()V {
-			.stack 2;
+			.stack 4;
 			.locals 0;
 
-				L0:	invokestatic 41;		// javacard/framework/JCSystem.beginTransaction()V
-					sconst_0;
+				L0:	sconst_0;
 					putstatic_b 40;		// boolean project/CardService.pinCreated
 					sconst_1;
 					putstatic_s 25;		// short project/CardService.pinCounter
 					sconst_0;
 					putstatic_b 48;		// boolean project/CardService.infoInit
 					sconst_0;
-					putstatic_s 105;		// short project/CardService.offsetIndexReceiveData
+					putstatic_s 106;		// short project/CardService.offsetIndexReceiveData
 					sconst_0;
-					putstatic_s 61;		// short project/CardService.offsetIndexSendData
+					putstatic_s 62;		// short project/CardService.offsetIndexSendData
 					sconst_0;
-					putstatic_s 59;		// short project/CardService.avatarLengthRemain
+					putstatic_s 60;		// short project/CardService.avatarLengthRemain
 					aconst_null;
-					putstatic_a 60;		// reference project/CardService.temp
+					putstatic_a 61;		// reference project/CardService.temp
 					bspush 16;
 					newarray 11;
 					putstatic_a 23;		// reference project/CardService.pin
-					sspush 32752;
-					newarray 11;
-					putstatic_a 56;		// reference project/CardService.avatar
+					getstatic_a 117;		// reference project/CardService.avatar
 					sconst_0;
-					putstatic_b 58;		// byte project/CardService.id
+					getstatic_a 117;		// reference project/CardService.avatar
+					arraylength;
+					sconst_0;
+					invokestatic 113;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					sconst_0;
+					putstatic_b 59;		// byte project/CardService.id
 					aconst_null;
-					putstatic_a 64;		// reference project/CardService.name
+					putstatic_a 65;		// reference project/CardService.name
 					aconst_null;
-					putstatic_a 68;		// reference project/CardService.date
+					putstatic_a 69;		// reference project/CardService.date
 					aconst_null;
-					putstatic_a 70;		// reference project/CardService.phone
+					putstatic_a 71;		// reference project/CardService.phone
 					aconst_null;
-					putstatic_a 72;		// reference project/CardService.studentId
+					putstatic_a 73;		// reference project/CardService.studentId
 					aconst_null;
-					putstatic_a 74;		// reference project/CardService.classSV
-					new 117;		// project/LichSuMuonSach
+					putstatic_a 75;		// reference project/CardService.classSV
+					new 121;		// project/LichSuMuonSach
 					dup;
-					invokespecial 118;		// project/LichSuMuonSach.<init>()V
-					putstatic_a 119;		// reference project/CardService.historyBook
-					new 114;		// project/LichSuGuiXe
+					invokespecial 122;		// project/LichSuMuonSach.<init>()V
+					putstatic_a 123;		// reference project/CardService.historyBook
+					new 118;		// project/LichSuGuiXe
 					dup;
-					invokespecial 115;		// project/LichSuGuiXe.<init>()V
-					putstatic_a 116;		// reference project/CardService.historyVehicle
-					invokestatic 43;		// javacard/framework/JCSystem.commitTransaction()V
+					invokespecial 119;		// project/LichSuGuiXe.<init>()V
+					putstatic_a 120;		// reference project/CardService.historyVehicle
 					return;
 		}
 
@@ -1801,14 +1822,14 @@
 				L0:	getfield_a_this 5;		// reference project/CardService.rsaSig
 					getfield_a_this 6;		// reference project/CardService.rsaPrivKey
 					sconst_1;
-					invokevirtual 111;		// init(Ljavacard/security/Key;B)V
+					invokevirtual 114;		// init(Ljavacard/security/Key;B)V
 					getfield_a_this 5;		// reference project/CardService.rsaSig
 					aload_2;
 					sconst_0;
 					sload_3;
 					getfield_a_this 4;		// reference project/CardService.sig_buffer
 					sconst_0;
-					invokevirtual 112;		// sign([BSS[BS)S
+					invokevirtual 115;		// sign([BSS[BS)S
 					sstore 4;
 				L1:	aload_1;
 					invokevirtual 44;		// setOutgoing()S
@@ -1855,13 +1876,13 @@
 					newarray 11;
 					astore_2;
 				L1:	getfield_a_this 0;		// reference project/CardService.aesKey
-					getstatic_a 102;		// reference project/Constant.KEY_AES
+					getstatic_a 103;		// reference project/Constant.KEY_AES
 					sconst_0;
-					invokeinterface 3 122 4;		// javacard/security/AESKey
+					invokeinterface 3 126 4;		// javacard/security/AESKey
 					getfield_a_this 1;		// reference project/CardService.cipher
 					getfield_a_this 0;		// reference project/CardService.aesKey
 					sconst_2;
-					invokevirtual 103;		// init(Ljavacard/security/Key;B)V
+					invokevirtual 104;		// init(Ljavacard/security/Key;B)V
 					getfield_a_this 1;		// reference project/CardService.cipher
 					aload_1;
 					sconst_0;
@@ -1869,7 +1890,7 @@
 					arraylength;
 					aload_2;
 					sconst_0;
-					invokevirtual 104;		// doFinal([BSS[BS)S
+					invokevirtual 105;		// doFinal([BSS[BS)S
 					pop;
 					aload_2;
 					areturn;
@@ -1884,13 +1905,13 @@
 					newarray 11;
 					astore_2;
 				L1:	getfield_a_this 0;		// reference project/CardService.aesKey
-					getstatic_a 102;		// reference project/Constant.KEY_AES
+					getstatic_a 103;		// reference project/Constant.KEY_AES
 					sconst_0;
-					invokeinterface 3 122 4;		// javacard/security/AESKey
+					invokeinterface 3 126 4;		// javacard/security/AESKey
 					getfield_a_this 1;		// reference project/CardService.cipher
 					getfield_a_this 0;		// reference project/CardService.aesKey
 					sconst_1;
-					invokevirtual 103;		// init(Ljavacard/security/Key;B)V
+					invokevirtual 104;		// init(Ljavacard/security/Key;B)V
 					getfield_a_this 1;		// reference project/CardService.cipher
 					aload_1;
 					sconst_0;
@@ -1898,10 +1919,31 @@
 					arraylength;
 					aload_2;
 					sconst_0;
-					invokevirtual 104;		// doFinal([BSS[BS)S
+					invokevirtual 105;		// doFinal([BSS[BS)S
 					pop;
 					aload_2;
 					areturn;
+		}
+
+		.method private copy([B[B)V {
+			.stack 4;
+			.locals 1;
+
+				L0:	sconst_0;
+					sstore_3;
+				L1:	sload_3;
+					aload_2;
+					arraylength;
+					if_scmpge L3;
+				L2:	aload_2;
+					sload_3;
+					aload_1;
+					sload_3;
+					baload;
+					bastore;
+					sinc 3 1;
+					goto L1;
+				L3:	return;
 		}
 
 	}
@@ -1929,7 +1971,7 @@
 			public static final short PIN_WRAPPER_LENGTH = 16;		// S
 			public static final byte PIN_DEFAULT = 46;		// B
 			public static final short MAX_PIN_COUNTER = 5;		// S
-			public static final short AVATAR_LENGTH = 32752;		// S
+			public static final short AVATAR_LENGTH = 16000;		// S
 			public static final short MAX_SIZE_APDU = 255;		// S
 			public static final short MAX_SIZE_TEXT = 1000;		// S
 			public static final byte RESPONSE_HAS_NEXT = 50;		// B
@@ -1975,7 +2017,7 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 113;		// java/lang/Object.<init>()V
+					invokespecial 116;		// java/lang/Object.<init>()V
 					return;
 		}
 
@@ -2006,13 +2048,13 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 113;		// java/lang/Object.<init>()V
+					invokespecial 116;		// java/lang/Object.<init>()V
 					aload_0;
 					aload_1;
-					putfield_a 9;		// reference project/GuiXeRecord.thoiGian
+					putfield_a 8;		// reference project/GuiXeRecord.thoiGian
 					aload_0;
 					sload_2;
-					putfield_s 10;		// short project/GuiXeRecord.trangThai
+					putfield_s 9;		// short project/GuiXeRecord.trangThai
 					return;
 		}
 
@@ -2022,7 +2064,7 @@
 
 				L0:	aload_0;
 					aload_1;
-					putfield_a 9;		// reference project/GuiXeRecord.thoiGian
+					putfield_a 8;		// reference project/GuiXeRecord.thoiGian
 					return;
 		}
 
@@ -2032,7 +2074,7 @@
 
 				L0:	aload_0;
 					sload_1;
-					putfield_s 10;		// short project/GuiXeRecord.trangThai
+					putfield_s 9;		// short project/GuiXeRecord.trangThai
 					return;
 		}
 
@@ -2040,7 +2082,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_a_this 9;		// reference project/GuiXeRecord.thoiGian
+				L0:	getfield_a_this 8;		// reference project/GuiXeRecord.thoiGian
 					areturn;
 		}
 
@@ -2048,7 +2090,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_s_this 10;		// short project/GuiXeRecord.trangThai
+				L0:	getfield_s_this 9;		// short project/GuiXeRecord.trangThai
 					sreturn;
 		}
 
@@ -2080,17 +2122,17 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 113;		// java/lang/Object.<init>()V
+					invokespecial 116;		// java/lang/Object.<init>()V
 					aload_0;
 					sconst_5;
-					anewarray 78;		// project/GuiXeRecord
-					putfield_a 11;		// reference project/LichSuGuiXe.lichSu
+					anewarray 79;		// project/GuiXeRecord
+					putfield_a 10;		// reference project/LichSuGuiXe.lichSu
 					aload_0;
 					sconst_0;
-					putfield_s 12;		// short project/LichSuGuiXe.currentIndex
+					putfield_s 11;		// short project/LichSuGuiXe.currentIndex
 					aload_0;
 					sconst_1;
-					putfield_b 13;		// boolean project/LichSuGuiXe.isEmpty
+					putfield_b 12;		// boolean project/LichSuGuiXe.isEmpty
 					return;
 		}
 
@@ -2098,7 +2140,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_a_this 11;		// reference project/LichSuGuiXe.lichSu
+				L0:	getfield_a_this 10;		// reference project/LichSuGuiXe.lichSu
 					areturn;
 		}
 
@@ -2106,7 +2148,7 @@
 			.stack 5;
 			.locals 1;
 
-				L0:	getfield_s_this 12;		// short project/LichSuGuiXe.currentIndex
+				L0:	getfield_s_this 11;		// short project/LichSuGuiXe.currentIndex
 					sconst_4;
 					if_scmplt L7;
 				L1:	sconst_0;
@@ -2117,14 +2159,14 @@
 				L3:	sload_2;
 					sconst_4;
 					if_scmpne L5;
-				L4:	getfield_a_this 11;		// reference project/LichSuGuiXe.lichSu
+				L4:	getfield_a_this 10;		// reference project/LichSuGuiXe.lichSu
 					sload_2;
 					aload_1;
 					aastore;
 					goto L6;
-				L5:	getfield_a_this 11;		// reference project/LichSuGuiXe.lichSu
+				L5:	getfield_a_this 10;		// reference project/LichSuGuiXe.lichSu
 					sload_2;
-					getfield_a_this 11;		// reference project/LichSuGuiXe.lichSu
+					getfield_a_this 10;		// reference project/LichSuGuiXe.lichSu
 					sload_2;
 					sconst_1;
 					sadd;
@@ -2133,19 +2175,19 @@
 					sinc 2 1;
 					goto L2;
 				L6:	goto L8;
-				L7:	getfield_a_this 11;		// reference project/LichSuGuiXe.lichSu
-					getfield_s_this 12;		// short project/LichSuGuiXe.currentIndex
+				L7:	getfield_a_this 10;		// reference project/LichSuGuiXe.lichSu
+					getfield_s_this 11;		// short project/LichSuGuiXe.currentIndex
 					aload_1;
 					aastore;
 					aload_0;
 					dup;
-					getfield_s 12;		// short project/LichSuGuiXe.currentIndex
+					getfield_s 11;		// short project/LichSuGuiXe.currentIndex
 					sconst_1;
 					sadd;
-					putfield_s 12;		// short project/LichSuGuiXe.currentIndex
+					putfield_s 11;		// short project/LichSuGuiXe.currentIndex
 				L8:	aload_0;
 					sconst_0;
-					putfield_b 13;		// boolean project/LichSuGuiXe.isEmpty
+					putfield_b 12;		// boolean project/LichSuGuiXe.isEmpty
 					return;
 		}
 
@@ -2153,10 +2195,10 @@
 			.stack 2;
 			.locals 0;
 
-				L0:	getfield_a_this 11;		// reference project/LichSuGuiXe.lichSu
-					getfield_s_this 12;		// short project/LichSuGuiXe.currentIndex
+				L0:	getfield_a_this 10;		// reference project/LichSuGuiXe.lichSu
+					getfield_s_this 11;		// short project/LichSuGuiXe.currentIndex
 					aaload;
-					invokevirtual 93;		// getTrangThai()S
+					invokevirtual 94;		// getTrangThai()S
 					sreturn;
 		}
 
@@ -2164,7 +2206,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_s_this 12;		// short project/LichSuGuiXe.currentIndex
+				L0:	getfield_s_this 11;		// short project/LichSuGuiXe.currentIndex
 					sreturn;
 		}
 
@@ -2172,7 +2214,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_b_this 13;		// boolean project/LichSuGuiXe.isEmpty
+				L0:	getfield_b_this 12;		// boolean project/LichSuGuiXe.isEmpty
 					sreturn;
 		}
 
@@ -2204,17 +2246,17 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 113;		// java/lang/Object.<init>()V
+					invokespecial 116;		// java/lang/Object.<init>()V
 					aload_0;
 					sconst_5;
-					anewarray 82;		// project/SachRecord
-					putfield_a 14;		// reference project/LichSuMuonSach.lichSu
+					anewarray 83;		// project/SachRecord
+					putfield_a 13;		// reference project/LichSuMuonSach.lichSu
 					aload_0;
 					sconst_0;
-					putfield_s 15;		// short project/LichSuMuonSach.currentIndex
+					putfield_s 14;		// short project/LichSuMuonSach.currentIndex
 					aload_0;
 					sconst_1;
-					putfield_b 16;		// boolean project/LichSuMuonSach.isEmpty
+					putfield_b 15;		// boolean project/LichSuMuonSach.isEmpty
 					return;
 		}
 
@@ -2222,7 +2264,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_a_this 14;		// reference project/LichSuMuonSach.lichSu
+				L0:	getfield_a_this 13;		// reference project/LichSuMuonSach.lichSu
 					areturn;
 		}
 
@@ -2230,7 +2272,7 @@
 			.stack 5;
 			.locals 1;
 
-				L0:	getfield_s_this 15;		// short project/LichSuMuonSach.currentIndex
+				L0:	getfield_s_this 14;		// short project/LichSuMuonSach.currentIndex
 					sconst_4;
 					if_scmplt L7;
 				L1:	sconst_0;
@@ -2241,14 +2283,14 @@
 				L3:	sload_2;
 					sconst_4;
 					if_scmpne L5;
-				L4:	getfield_a_this 14;		// reference project/LichSuMuonSach.lichSu
+				L4:	getfield_a_this 13;		// reference project/LichSuMuonSach.lichSu
 					sload_2;
 					aload_1;
 					aastore;
 					goto L6;
-				L5:	getfield_a_this 14;		// reference project/LichSuMuonSach.lichSu
+				L5:	getfield_a_this 13;		// reference project/LichSuMuonSach.lichSu
 					sload_2;
-					getfield_a_this 14;		// reference project/LichSuMuonSach.lichSu
+					getfield_a_this 13;		// reference project/LichSuMuonSach.lichSu
 					sload_2;
 					sconst_1;
 					sadd;
@@ -2257,19 +2299,19 @@
 					sinc 2 1;
 					goto L2;
 				L6:	goto L8;
-				L7:	getfield_a_this 14;		// reference project/LichSuMuonSach.lichSu
-					getfield_s_this 15;		// short project/LichSuMuonSach.currentIndex
+				L7:	getfield_a_this 13;		// reference project/LichSuMuonSach.lichSu
+					getfield_s_this 14;		// short project/LichSuMuonSach.currentIndex
 					aload_1;
 					aastore;
 					aload_0;
 					dup;
-					getfield_s 15;		// short project/LichSuMuonSach.currentIndex
+					getfield_s 14;		// short project/LichSuMuonSach.currentIndex
 					sconst_1;
 					sadd;
-					putfield_s 15;		// short project/LichSuMuonSach.currentIndex
+					putfield_s 14;		// short project/LichSuMuonSach.currentIndex
 				L8:	aload_0;
 					sconst_0;
-					putfield_b 16;		// boolean project/LichSuMuonSach.isEmpty
+					putfield_b 15;		// boolean project/LichSuMuonSach.isEmpty
 					return;
 		}
 
@@ -2277,10 +2319,10 @@
 			.stack 2;
 			.locals 0;
 
-				L0:	getfield_a_this 14;		// reference project/LichSuMuonSach.lichSu
-					getfield_s_this 15;		// short project/LichSuMuonSach.currentIndex
+				L0:	getfield_a_this 13;		// reference project/LichSuMuonSach.lichSu
+					getfield_s_this 14;		// short project/LichSuMuonSach.currentIndex
 					aaload;
-					invokevirtual 99;		// getTrangThai()S
+					invokevirtual 100;		// getTrangThai()S
 					sreturn;
 		}
 
@@ -2288,7 +2330,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_s_this 15;		// short project/LichSuMuonSach.currentIndex
+				L0:	getfield_s_this 14;		// short project/LichSuMuonSach.currentIndex
 					sreturn;
 		}
 
@@ -2296,7 +2338,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_b_this 16;		// boolean project/LichSuMuonSach.isEmpty
+				L0:	getfield_b_this 15;		// boolean project/LichSuMuonSach.isEmpty
 					sreturn;
 		}
 
@@ -2327,16 +2369,16 @@
 			.locals 0;
 
 				L0:	aload_0;
-					invokespecial 113;		// java/lang/Object.<init>()V
+					invokespecial 116;		// java/lang/Object.<init>()V
 					aload_0;
 					sload_2;
-					putfield_s 17;		// short project/SachRecord.trangThai
+					putfield_s 16;		// short project/SachRecord.trangThai
 					aload_0;
 					aload_1;
-					putfield_a 18;		// reference project/SachRecord.thoiGian
+					putfield_a 17;		// reference project/SachRecord.thoiGian
 					aload_0;
 					sload_3;
-					putfield_s 19;		// short project/SachRecord.idSach
+					putfield_s 18;		// short project/SachRecord.idSach
 					return;
 		}
 
@@ -2344,7 +2386,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_a_this 18;		// reference project/SachRecord.thoiGian
+				L0:	getfield_a_this 17;		// reference project/SachRecord.thoiGian
 					areturn;
 		}
 
@@ -2352,7 +2394,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_s_this 17;		// short project/SachRecord.trangThai
+				L0:	getfield_s_this 16;		// short project/SachRecord.trangThai
 					sreturn;
 		}
 
@@ -2360,7 +2402,7 @@
 			.stack 1;
 			.locals 0;
 
-				L0:	getfield_s_this 19;		// short project/SachRecord.idSach
+				L0:	getfield_s_this 18;		// short project/SachRecord.idSach
 					sreturn;
 		}
 

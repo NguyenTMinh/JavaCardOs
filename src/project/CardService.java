@@ -52,8 +52,9 @@ public class CardService extends Applet
 	private static short offsetIndexSendData = (short)0;
 	private static short avatarSize;
 	private static short avatarLengthRemain = (short)0;
+	private static boolean doneGetData = true;
 	private static byte[] temp; // temp tam de tra avatar
-	private byte[] avatarDecryptTemp; // mang chua avatar duoc giai ma tam thoi, chi dung khi gui thong tin len app, xoa ngay lap tuc khi khong dung
+	private static byte[] avatarDecryptTemp; // mang chua avatar duoc giai ma tam thoi, chi dung khi gui thong tin len app, xoa ngay lap tuc khi khong dung
 	
 	private CardService() {
 		aesKey = (AESKey) KeyBuilder.buildKey(KeyBuilder.TYPE_AES, KeyBuilder.LENGTH_AES_128, false);
@@ -187,11 +188,12 @@ public class CardService extends Applet
 		case Constant.INS_GET_DATA: {
 			byte choice = buf[ISO7816.OFFSET_P1];
 			// decrypt avatar truoc da
-			if (avatarDecryptTemp == null) {
+			if (avatarDecryptTemp == null && doneGetData) {
 				avatarDecryptTemp = aesDecrypt(avatar);
 			}
 			switch(choice) {
 			case Constant.PARAM_ID:{
+				doneGetData = false;
 				byte[] resp = new byte[]{id};
 				sendResponse(apdu, resp);
 				break;
@@ -251,6 +253,7 @@ public class CardService extends Applet
 				byte[] temp = aesDecrypt(classSV);
 				sendResponse(apdu, temp, classSVLen);
 				temp = null;
+				doneGetData = true;
 				break;
 			}
 			}
@@ -336,6 +339,7 @@ public class CardService extends Applet
 			}
 			GuiXeRecord rc = historyVehicle.getLichSu()[indexLSX];
 			if (rc == null) {
+				indexLSX = (short)0;
 				sendResponse(apdu, new byte[]{(byte)0x00});
 				break;
 			}
@@ -491,7 +495,9 @@ public class CardService extends Applet
 				avatarLengthRemain = avatarSize;
 				offsetIndexReceiveData = (short)0;
 				
-				avatar = aesEncrypt(avatar);
+				byte[] temp2 = aesEncrypt(avatar);
+				copy(temp2, avatar);
+				temp2 = null;
 				avatarLen = avatarSize;
 				// ma hoa avatar - end
 				
@@ -578,7 +584,6 @@ public class CardService extends Applet
 	* Xoa sach thong tin trong the
 	*/
 	private void resetInfo() {
-		JCSystem.beginTransaction();
 		// reset bien
 		pinCreated = false;
 		pinCounter = 1;
@@ -589,7 +594,7 @@ public class CardService extends Applet
 		temp = null;
 		// reset thong tin 
 		pin = new byte[Constant.PIN_WRAPPER_LENGTH];
-		avatar = new byte[Constant.AVATAR_LENGTH];
+		Util.arrayFillNonAtomic(avatar, (short) 0, (short) avatar.length, (byte) 0x00);
 		id = (byte)0x00;
 		name = null;
 		date = null;
@@ -599,7 +604,6 @@ public class CardService extends Applet
 		//
 		historyBook = new LichSuMuonSach();
 		historyVehicle = new LichSuGuiXe();
-		JCSystem.commitTransaction();
 	}
 	
 	/** 
@@ -642,5 +646,11 @@ public class CardService extends Applet
 		cipher.doFinal(input, (short)0, (short)input.length, output, (short)0);
 		
 		return output;
+	}
+	
+	private void copy(byte[] src, byte[] dest) {
+		for (short i = 0; i < dest.length; i++) {
+			dest[i] = src[i];
+		}
 	}
 }
